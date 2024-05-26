@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.WebApplication.Entities
 {
-    public class AboutUs : BaseEntity
+    public class About : BaseEntity
     {
         public string Header { get; set; } = string.Empty;
 
