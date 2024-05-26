@@ -13,13 +13,13 @@ namespace EntityLayer.WebApplication.Entities
 
         public string Description { get; set; } = string.Empty;
 
-        public string Clients {  get; set; } = string.Empty;
+        public int Clients {  get; set; }
 
-        public string Projects { get; set; } = string.Empty;
+        public int Projects { get; set; }
 
-        public string HoursOfSupport { get; set; } = string.Empty;  
+        public int HoursOfSupport { get; set; }
 
-        public string HardWorkers {  get; set; } = string.Empty;
+        public int HardWorkers {  get; set; }
 
         public string FileName { get; set; } = string.Empty;
 

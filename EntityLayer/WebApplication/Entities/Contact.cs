@@ -9,7 +9,6 @@ namespace EntityLayer.WebApplication.Entities
 {
     public class Contact : BaseEntity
     {
-
         public string Location { get; set; } = string.Empty;
 
         public string Email { get; set; } = string.Empty;
