@@ -21,6 +21,20 @@ namespace RepositoryLayer.Configurations
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
             builder.Property(x => x.FileName).IsRequired();
             builder.Property(x => x.FileType).IsRequired();
+
+            builder.HasData(
+                new Team
+                {
+                    Id = 1,
+                    FullName = "Duis Tristique ",
+                    Title = "Augue interdum velit euismod in.",
+                    FileName = "Lectus quam",
+                    FileType = ".sat",
+                    Instagram = "Test",
+                    LinkedId = "Test",
+                    Facebook = "Test"
+
+                });
         }
     }
 }

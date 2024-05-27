@@ -21,6 +21,16 @@ namespace RepositoryLayer.Configurations
             builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Call).IsRequired().HasMaxLength(17);
             builder.Property(x => x.Map).IsRequired();
+
+            builder.HasData(new Contact
+            {
+                Id = 1,
+                Call = "+998-94-361-99-25",
+                Email = "pirmatovalisher000@gmail.com",
+                Location = "Tarraqiyot 35, 37-Xamza MFY, Chirchiq shaxri, Toshkent v., Uzb",
+                Map = "Location Link here",
+
+            });
         }
     }
 }

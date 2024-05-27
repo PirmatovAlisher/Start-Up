@@ -21,6 +21,14 @@ namespace RepositoryLayer.Configurations
             builder.Property(x => x.Description).IsRequired().HasMaxLength(2000);
             builder.Property(x => x.VideoLink).IsRequired();
 
+            builder.HasData(new HomePage
+            {
+                Id = 1,
+                Header = "Rutrum tellus pellentesque eu tincidunt.",
+                Description = "Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nec nam aliquam sem et tortor. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Diam in arcu cursus euismod quis viverra nibh cras. Velit sed ullamcorper morbi tincidunt ornare. ",
+                VideoLink = "Video Link here"
+            });
+
         }
     }
 }

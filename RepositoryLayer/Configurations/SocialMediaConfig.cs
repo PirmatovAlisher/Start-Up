@@ -16,6 +16,14 @@ namespace RepositoryLayer.Configurations
             builder.Property(x => x.CreatedDate).IsRequired().HasMaxLength(10);
             builder.Property(x => x.UpdatedDate).HasMaxLength(10);
             builder.Property(x => x.RowVersion).IsRowVersion();
+
+            builder.HasData(new SocialMedia
+            {
+                Id = 1,
+                Facebook = "Facebook",
+                Instagram = "Instagram",
+                Twitter = "Twitter"
+            });
         }
     }
 }
