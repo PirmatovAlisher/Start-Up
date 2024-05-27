@@ -1,3 +1,5 @@
+using RepositoryLayer.Extensions;
+
 namespace StartUp
 {
     public class Program
@@ -8,6 +10,7 @@ namespace StartUp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.LoadRepositoryLayerExtensions(builder.Configuration);
 
             var app = builder.Build();
 
