@@ -12,7 +12,7 @@ namespace StartUp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.LoadRepositoryLayerExtensions(builder.Configuration);
-            builder.Services.LoadServiceLayerExtensions(); 
+            builder.Services.LoadServiceLayerExtensions();
 
             var app = builder.Build();
 
@@ -31,9 +31,18 @@ namespace StartUp
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
+# pragma warning disable ASP0014
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}"
+                    );
+                endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.Run();
         }
