@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EntityLayer.WebApplication.ViewModels.AboutVM;
+using EntityLayer.WebApplication.ViewModels.ContactVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,10 @@ namespace ServiceLayer.Services.Abstract
 {
     public interface IContactService
     {
+        Task<List<ContactListVM>> GetAllListAsync();
+        Task AddContactAsync(ContactAddVM request);
+        Task DeleteContactAsync(int id);
+        Task<ContactUpdateVM> GetContactById(int id);
+        Task UpdateContactAsync(ContactUpdateVM request);
     }
 }
