@@ -32,7 +32,7 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<PortfolioListVM>> GetAllListAsync()
         {
-            var portfolioListVM = await _repository.GetAllEntityListAsync().
+            var portfolioListVM = await _repository.GetAllEntityList().
                                                 ProjectTo<PortfolioListVM>(_mapper.ConfigurationProvider).
                                                 ToListAsync();
             return portfolioListVM;

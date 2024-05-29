@@ -32,7 +32,7 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<HomePageListVM>> GetAllListAsync()
         {
-            var homePageListVM = await _repository.GetAllEntityListAsync().
+            var homePageListVM = await _repository.GetAllEntityList().
                                                 ProjectTo<HomePageListVM>(_mapper.ConfigurationProvider).
                                                 ToListAsync();
             return homePageListVM;

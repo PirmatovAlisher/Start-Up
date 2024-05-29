@@ -33,7 +33,7 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<ContactListVM>> GetAllListAsync()
         {
-            var contactListVM = await _repository.GetAllEntityListAsync().
+            var contactListVM = await _repository.GetAllEntityList().
                                                 ProjectTo<ContactListVM>(_mapper.ConfigurationProvider).
                                                 ToListAsync();
             return contactListVM;

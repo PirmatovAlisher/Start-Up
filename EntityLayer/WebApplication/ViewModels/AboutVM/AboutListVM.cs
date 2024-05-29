@@ -10,7 +10,7 @@ namespace EntityLayer.WebApplication.ViewModels.AboutVM
 
         public DateTime? UpdatedDate { get; set; }
 
-        public byte[] RowVersion { get; set; } = null!;
+        //public byte[] RowVersion { get; set; } = null!;
 
 
 

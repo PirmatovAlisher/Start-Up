@@ -38,7 +38,7 @@ namespace RepositoryLayer.Repositories.Concrete
             _dbSet.Remove(entity);
         }
 
-        public IQueryable<T> GetAllEntityListAsync()
+        public IQueryable<T> GetAllEntityList()
         {
             return _dbSet.AsNoTracking().AsQueryable();
         }

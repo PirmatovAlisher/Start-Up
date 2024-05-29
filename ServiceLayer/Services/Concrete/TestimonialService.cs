@@ -27,7 +27,7 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<TestimonialListVM>> GetAllListAsync()
         {
-            var testimonialListVM = await _repository.GetAllEntityListAsync().
+            var testimonialListVM = await _repository.GetAllEntityList().
                                                 ProjectTo<TestimonialListVM>(_mapper.ConfigurationProvider).
                                                 ToListAsync();
             return testimonialListVM;

@@ -2,7 +2,7 @@
 
 namespace StartUp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    //[Area("Admin")]
     public class DashboardController : Controller
     {
         public IActionResult Index()

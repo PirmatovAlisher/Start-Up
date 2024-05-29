@@ -27,7 +27,7 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<SocialMediaListVM>> GetAllListAsync()
         {
-            var socialMediaListVM = await _repository.GetAllEntityListAsync().
+            var socialMediaListVM = await _repository.GetAllEntityList().
                                                 ProjectTo<SocialMediaListVM>(_mapper.ConfigurationProvider).
                                                 ToListAsync();
             return socialMediaListVM;

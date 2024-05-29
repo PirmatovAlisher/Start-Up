@@ -27,7 +27,7 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<TeamListVM>> GetAllListAsync()
         {
-            var teamListVM = await _repository.GetAllEntityListAsync().
+            var teamListVM = await _repository.GetAllEntityList().
                                                 ProjectTo<TeamListVM>(_mapper.ConfigurationProvider).
                                                 ToListAsync();
             return teamListVM;
