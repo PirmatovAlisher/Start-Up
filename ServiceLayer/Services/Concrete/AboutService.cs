@@ -31,7 +31,7 @@ namespace ServiceLayer.Services.Concrete
             //                                    ProjectTo<AboutListVM>(_mapper.ConfigurationProvider).
             //                                    ToListAsync();
 
-            var aboutList = await _repository.GetAllEntityList().ToListAsync();
+            var aboutList = await _repository.GetAllEntityList().Include(x=> x.SocialMedia).ToListAsync();
 
             var aboutListVM = _mapper.Map<List<AboutListVM>>(aboutList);
 

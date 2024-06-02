@@ -12,8 +12,8 @@
 
 <nav>
 	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-		<li class="breadcrumb-item active">About Us</li>
+		<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="About" asp-action="GetAboutList">About Us</a></li>
 	</ol>
 </nav>
 <!-- End BreadCrum -->
@@ -64,12 +64,12 @@
 					<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
 						<img src="~/NiceAdmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-						@* <div class="social-links mt-2">
+						<div class="social-links mt-2">
 							<a href="@item.SocialMedia.Twitter" class="twitter"><i class="bi bi-twitter"></i></a>
 							<a href="@item.SocialMedia.Facebook" class="facebook"><i class="bi bi-facebook"></i></a>
 							<a href="@item.SocialMedia.Instagram" class="instagram"><i class="bi bi-instagram"></i></a>
 							<a href="@item.SocialMedia.LinkedId" class="linkedin"><i class="bi bi-linkedin"></i></a>
-						</div> *@
+						</div>
 					</div>
 				</div>
 
@@ -110,7 +110,7 @@
 									<div class="col-lg-9 col-md-8">@item.HardWorkers</div>
 								</div>
 
-								<a href="#" class="btn btn-info">Edit</a>
+								<a asp-area="Admin" asp-controller="About" asp-action="UpdateAbout" data-id="@item.Id" asp-route-id="@item.Id" class="btn btn-outline-info">Edit</a>
 							</div>
 						</div><!-- End Bordered Tabs -->
 

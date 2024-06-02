@@ -1,18 +1,18 @@
-﻿@model AboutAddVM
+﻿@model AboutUpdateVM
 @{
-	ViewData["Title"] = "AddAbout";
+	ViewData["Title"] = "UpdateAbout";
 	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <!-- Start BreadCrum -->
 
-<h5 class="card-title">Add New About Us</h5>
+<h5 class="card-title">Update About Us</h5>
 
 <nav>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
 		<li class="breadcrumb-item "><a asp-area="Admin" asp-controller="About" asp-action="GetAboutList">About Us</a></li>
-		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="About" asp-action="AddAbout">Add About Us</a></li>
+		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="About" asp-action="UpdateAbout">Update</a></li>
 	</ol>
 </nav>
 <!-- End BreadCrum -->
@@ -22,7 +22,9 @@
 	<div class="card-body">
 		<br />
 		<!-- Floating Labels Form -->
-		<form asp-area="Admin" asp-controller="About" asp-action="AddAbout" method="post" class="row g-3" enctype="multipart/form-data">
+		<form asp-area="Admin" asp-controller="About" asp-action="UpdateAbout" method="post" class="row g-3" enctype="multipart/form-data">
+			<input type="hidden" asp-for="Id" />
+			<input type="hidden" asp-for="RowVersion" />
 			<input type="hidden" asp-for="FileName" value="FileNameTest1" />
 			<input type="hidden" asp-for="FileType" value="FileTypeTest1" />
 			<input type="hidden" asp-for="SocialMediaId" value="1" />
@@ -64,9 +66,9 @@
 			</div>
 
 
-			<partial name="AboutPartialView/AddAbout/_SocialMedia" />
+			<partial name="AboutPartialView/UpdateAbout/_SocialMedia" />
 
-			
+
 			<div class="col-md-3">
 				<label asp-for="Photo" class="col-md-4 col-lg-3 col-form-label"></label>
 				<div class="form-floating">
@@ -82,3 +84,4 @@
 
 	</div>
 </div>
+
