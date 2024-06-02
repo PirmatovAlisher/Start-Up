@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.ContactVM;
 using EntityLayer.WebApplication.ViewModels.HomePageVM;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Repositories.Abstract;
@@ -32,10 +33,15 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<HomePageListVM>> GetAllListAsync()
         {
-            var homePageListVM = await _repository.GetAllEntityList().
-                                                ProjectTo<HomePageListVM>(_mapper.ConfigurationProvider).
-                                                ToListAsync();
-            return homePageListVM;
+			//var homePageListVM = await _repository.GetAllEntityList().
+			//                                    ProjectTo<HomePageListVM>(_mapper.ConfigurationProvider).
+			//                                    ToListAsync();
+
+			var homePageList = await _repository.GetAllEntityList().ToListAsync();
+
+			var homePageListVM = _mapper.Map<List<HomePageListVM>>(homePageList);
+
+			return homePageListVM;
         }
 
         public async Task AddHomePageAsync(HomePageAddVM request)

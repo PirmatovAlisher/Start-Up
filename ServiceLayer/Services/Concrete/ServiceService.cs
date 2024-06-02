@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.PortfolioVM;
 using EntityLayer.WebApplication.ViewModels.ServiceVM;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Repositories.Abstract;
@@ -27,10 +28,15 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<ServiceListVM>> GetAllListAsync()
         {
-            var serviceListVM = await _repository.GetAllEntityList().
-                                                ProjectTo<ServiceListVM>(_mapper.ConfigurationProvider).
-                                                ToListAsync();
-            return serviceListVM;
+			//var serviceListVM = await _repository.GetAllEntityList().
+			//                                    ProjectTo<ServiceListVM>(_mapper.ConfigurationProvider).
+			//                                    ToListAsync();
+
+			var serviceList = await _repository.GetAllEntityList().ToListAsync();
+
+			var serviceListVM = _mapper.Map<List<ServiceListVM>>(serviceList);
+
+			return serviceListVM;
         }
 
         public async Task AddServiceAsync(ServiceAddVM request)

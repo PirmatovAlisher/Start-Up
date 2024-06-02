@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.ServiceVM;
 using EntityLayer.WebApplication.ViewModels.SocialMediaVM;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Repositories.Abstract;
@@ -27,10 +28,15 @@ namespace ServiceLayer.Services.Concrete
 
         public async Task<List<SocialMediaListVM>> GetAllListAsync()
         {
-            var socialMediaListVM = await _repository.GetAllEntityList().
-                                                ProjectTo<SocialMediaListVM>(_mapper.ConfigurationProvider).
-                                                ToListAsync();
-            return socialMediaListVM;
+			//var socialMediaListVM = await _repository.GetAllEntityList().
+			//                                    ProjectTo<SocialMediaListVM>(_mapper.ConfigurationProvider).
+			//                                    ToListAsync();
+
+			var socialMediaList = await _repository.GetAllEntityList().ToListAsync();
+
+			var socialMediaListVM = _mapper.Map<List<SocialMediaListVM>>(socialMediaList);
+
+			return socialMediaListVM;
         }
 
         public async Task AddSocialMediaAsync(SocialMediaAddVM request)

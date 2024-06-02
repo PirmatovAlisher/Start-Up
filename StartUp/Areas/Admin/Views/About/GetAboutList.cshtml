@@ -51,6 +51,9 @@
 	</div>
 </div>
 
+<a asp-area="Admin" asp-controller="About" asp-action="AddAbout" class="btn btn-sm btn-outline-success mb-3">Add About Us</a>
+
+
 @foreach (var item in Model)
 {
 	<section class="section profile">
@@ -61,12 +64,12 @@
 					<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
 						<img src="~/NiceAdmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-						<div class="social-links mt-2">
+						@* <div class="social-links mt-2">
 							<a href="@item.SocialMedia.Twitter" class="twitter"><i class="bi bi-twitter"></i></a>
 							<a href="@item.SocialMedia.Facebook" class="facebook"><i class="bi bi-facebook"></i></a>
 							<a href="@item.SocialMedia.Instagram" class="instagram"><i class="bi bi-instagram"></i></a>
 							<a href="@item.SocialMedia.LinkedId" class="linkedin"><i class="bi bi-linkedin"></i></a>
-						</div>
+						</div> *@
 					</div>
 				</div>
 

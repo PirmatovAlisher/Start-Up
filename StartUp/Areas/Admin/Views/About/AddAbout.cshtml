@@ -1,0 +1,103 @@
+﻿@model AboutAddVM
+@{
+	ViewData["Title"] = "AddAbout";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start BreadCrum -->
+
+<h5 class="card-title">Add New About Us</h5>
+
+<nav>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+		<li class="breadcrumb-item ">About Us</li>
+		<li class="breadcrumb-item active">Add About Us</li>
+	</ol>
+</nav>
+<!-- End BreadCrum -->
+
+
+<div class="card">
+	<div class="card-body">
+		<br />
+		<!-- Floating Labels Form -->
+		<form asp-area="Admin" asp-controller="About" asp-action="AddAbout" method="post" class="row g-3" enctype="multipart/form-data">
+			<input type="hidden" asp-for="FileName" value="FileNameTest1" />
+			<input type="hidden" asp-for="FileType" value="FileTypeTest1" />
+			<input type="hidden" asp-for="SocialMediaId" value="1" />
+			<div class="col-md-12">
+				<div class="form-floating">
+					<input asp-for="Header" type="text" class="form-control" placeholder="Header here">
+					<label asp-for="Header">Header</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-floating">
+					<textarea asp-for="Description" type="text" class="form-control" placeholder="Description here"></textarea>
+					<label asp-for="Description">Description</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="Clients" type="number" class="form-control" placeholder="Clients here">
+					<label asp-for="Clients">Clients</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="HoursOfSupport" type="number" class="form-control" placeholder="Hours Of Support here">
+					<label asp-for="HoursOfSupport">Hours Of Support</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="HardWorkers" type="number" class="form-control" placeholder="Hard Workers here">
+					<label asp-for="HardWorkers">Hard Workers</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="Projects" type="number" class="form-control" placeholder="Projects here">
+					<label asp-for="Projects">Projects</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="SocialMedia.Twitter" type="text" class="form-control" placeholder="Twitter here">
+					<label asp-for="SocialMedia.Twitter">Twitter</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="SocialMedia.Instagram" type="text" class="form-control" placeholder="Instagram here">
+					<label asp-for="SocialMedia.Instagram">Instagram</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="SocialMedia.Facebook" type="text" class="form-control" placeholder="Facebook here">
+					<label asp-for="SocialMedia.Facebook">Facebook</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-floating">
+					<input asp-for="SocialMedia.LinkedId" type="text" class="form-control" placeholder="LinkedId here">
+					<label asp-for="SocialMedia.LinkedId">LinkedId</label>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<label asp-for="Photo" class="col-md-4 col-lg-3 col-form-label"></label>
+				<div class="form-floating">
+					<input asp-for="Photo" type="text" accept="image/*" type="file">
+				</div>
+			</div>
+
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-secondary">Reset</button>
+			</div>
+		</form><!-- End floating Labels Form -->
+
+	</div>
+</div>
