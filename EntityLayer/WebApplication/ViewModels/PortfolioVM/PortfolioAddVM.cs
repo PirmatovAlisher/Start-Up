@@ -1,4 +1,5 @@
 ﻿using EntityLayer.WebApplication.ViewModels.CategortVM;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,13 @@ namespace EntityLayer.WebApplication.ViewModels.PortfolioVM
 
         public string FileType { get; set; } = string.Empty;
 
-        public int CategoryId { get; set; }
+
+
+		public IFormFile Photo { get; set; } = null!;
+
+
+
+		public int CategoryId { get; set; }
 
         public CategoryAddVM Category { get; set; } = null!;
     }
