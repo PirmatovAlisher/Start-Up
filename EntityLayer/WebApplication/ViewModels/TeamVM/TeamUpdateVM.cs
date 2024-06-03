@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,12 @@ namespace EntityLayer.WebApplication.ViewModels.TeamVM
 
         public string FileType { get; set; } = string.Empty;
 
-        public string? Twitter { get; set; }
+
+		public IFormFile Photo { get; set; } = null!;
+
+
+
+		public string? Twitter { get; set; }
 
         public string? LinkedId { get; set; }
 
