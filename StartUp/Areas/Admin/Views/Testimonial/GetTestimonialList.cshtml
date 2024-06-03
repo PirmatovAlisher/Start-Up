@@ -1,0 +1,67 @@
+﻿@model List<TestimonialListVM>
+@{
+	ViewData["Title"] = "GetTestimonialList";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start BreadCrum -->
+
+<h5 class="card-title">Testimonial</h5>
+
+<nav>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Testimonial" asp-action="GetTestimonialList">Testimonials</a></li>
+	</ol>
+</nav>
+<!-- End BreadCrum -->
+
+
+<a asp-area="Admin" asp-controller="Testimonial" asp-action="AddTestimonial" class="btn btn-sm btn-success mb-3">Add Testimonial</a>
+
+
+<div class="card">
+	<div class="card-body">
+
+		<!-- Table with hoverable rows -->
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Full Name</th>
+					<th scope="col">Title</th>
+					<th scope="col">Comment</th>
+					<th scope="col">File Name</th>
+					<th scope="col">File Type</th>
+					<th scope="col">Created Date</th>
+					<th scope="col">Updated Date</th>
+					<th scope="col">Edit</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>@item.FullName</td>
+						<td>@item.Title</td>
+						<td>@item.Comment</td>
+						<td>@item.FileName</td>
+						<td>@item.FileType</td>
+						<td>@item.CreatedDate</td>
+						<td>@item.UpdatedDate</td>
+						<td>
+							<a asp-area="Admin" asp-controller="Testimonial" asp-action="UpdateTestimonial" asp-route-id="@item.Id"
+							   data-id="@item.Id" class="btn btn-sm btn-outline-info">Edit</a>
+						</td>
+						<td>
+							<a asp-area="Admin" asp-controller="Testimonial" asp-action="DeleteTestimonial" asp-route-id="@item.Id"
+							   data-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<!-- End Table with hoverable rows -->
+
+	</div>
+</div>
