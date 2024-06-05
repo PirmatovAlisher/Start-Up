@@ -37,7 +37,7 @@
 	<header id="header" class="header fixed-top d-flex align-items-center">
 
 		<div class="d-flex align-items-center justify-content-between">
-			<a href="index.html" class="logo d-flex align-items-center">
+			<a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="logo d-flex align-items-center">
 				<img src="~/NiceAdmin/assets/img/logo.png" alt="">
 				<span class="d-none d-lg-block">Admin</span>
 			</a>
@@ -52,63 +52,63 @@
 		<ul class="sidebar-nav" id="sidebar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link " href="index.html">
+				<a class="nav-link " asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
 					<i class="bi bi-grid"></i>
 					<span>Dashboard</span>
 				</a>
 			</li><!-- End Dashboard Nav -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="About" asp-action="GetAboutList">
 					<i class="bi bi-card-text"></i>
 					<span>About</span>
 				</a>
 			</li><!-- End About Section -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="Category" asp-action="GetCategoryList">
 					<i class="bi bi-list-ul"></i>
 					<span>Category</span>
 				</a>
 			</li><!-- End Category Section -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="Contact" asp-action="GetContactList">
 					<i class="bi bi-newspaper"></i>
 					<span>Contact</span>
 				</a>
 			</li><!-- End Contact Section -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="HomePage" asp-action="GetHomePageList">
 					<i class="bi bi-house-door-fill"></i>
 					<span>HomePage</span>
 				</a>
 			</li><!-- End HomePage Section -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="Portfolio" asp-action="GetPortfolioList">
 					<i class="bi bi-person-vcard-fill"></i>
 					<span>Portfolio</span>
 				</a>
 			</li><!-- End Portfolio Section -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="Service" asp-action="GetServiceList">
 					<i class="bi bi-ui-checks"></i>
 					<span>Service</span>
 				</a>
 			</li><!-- End Service Section -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="Team" asp-action="GetTeamList">
 					<i class="bi bi-people-fill"></i>
 					<span>Team</span>
 				</a>
 			</li><!-- End Team Section -->
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
+				<a class="nav-link collapsed" asp-area="Admin" asp-controller="Testimonial" asp-action="GetTestimonialList">
 					<i class="bi bi-file-earmark-medical-fill"></i>
 					<span>Testimonial</span>
 				</a>
