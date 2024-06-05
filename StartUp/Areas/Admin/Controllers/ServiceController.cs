@@ -1,10 +1,10 @@
 ﻿using EntityLayer.WebApplication.ViewModels.ServiceVM;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Services.Abstract;
+using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-	[Area("Admin")]
+    [Area("Admin")]
 	public class ServiceController : Controller
 	{
 		private readonly IServiceService _serviceService;

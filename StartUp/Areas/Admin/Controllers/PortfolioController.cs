@@ -1,10 +1,10 @@
 ﻿using EntityLayer.WebApplication.ViewModels.PortfolioVM;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Services.Abstract;
+using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-	[Area("Admin")]
+    [Area("Admin")]
 	public class PortfolioController : Controller
 	{
 		private readonly IPortfolioService _portfolioService;
