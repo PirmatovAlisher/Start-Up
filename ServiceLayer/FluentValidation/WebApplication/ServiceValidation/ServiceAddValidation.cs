@@ -1,12 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EntityLayer.WebApplication.ViewModels.ServiceVM;
+using FluentValidation;
 
 namespace ServiceLayer.FluentValidation.WebApplication.ServiceValidation
 {
-	internal class ServiceAddValidation
+	public class ServiceAddValidation : AbstractValidator<ServiceAddVM>
 	{
+		public ServiceAddValidation()
+		{
+			RuleFor(x => x.Name).
+				NotNull().
+				NotEmpty().
+				MaximumLength(100);
+
+			RuleFor(x => x.Description).
+				NotNull().
+				NotEmpty().
+				MaximumLength(2000);
+
+			RuleFor(x => x.Icon).
+				NotNull().
+				NotEmpty().
+				MaximumLength(100);
+		}
 	}
 }
