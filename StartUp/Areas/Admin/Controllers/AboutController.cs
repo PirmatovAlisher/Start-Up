@@ -1,17 +1,24 @@
 ﻿using EntityLayer.WebApplication.ViewModels.AboutVM;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class AboutController : Controller
+	[Area("Admin")]
+	public class AboutController : Controller
 	{
 		private readonly IAboutService _aboutService;
+		private readonly IValidator<AboutAddVM> _addValidator;
+		private readonly IValidator<AboutUpdateVM> _updateValidator;
 
-		public AboutController(IAboutService aboutService)
+		public AboutController(IAboutService aboutService,
+			IValidator<AboutAddVM> addValidator, IValidator<AboutUpdateVM> updateValidator)
 		{
 			_aboutService = aboutService;
+			_addValidator = addValidator;
+			_updateValidator = updateValidator;
 		}
 
 
@@ -33,8 +40,16 @@ namespace StartUp.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddAbout(AboutAddVM request)
 		{
-			await _aboutService.AddAboutAsync(request);
-			return RedirectToAction("GetAboutList", "About", new { Area = ("Admin") });
+			var validation = await _addValidator.ValidateAsync(request);
+			if (validation.IsValid)
+			{
+				await _aboutService.AddAboutAsync(request);
+				return RedirectToAction("GetAboutList", "About", new { Area = ("Admin") });
+			}
+
+			validation.AddToModelState(this.ModelState);
+			return View(request);
+
 		}
 
 		[HttpGet]
@@ -44,12 +59,21 @@ namespace StartUp.Areas.Admin.Controllers
 
 			return View(about);
 		}
-		
+
 		[HttpPost]
 		public async Task<IActionResult> UpdateAbout(AboutUpdateVM request)
 		{
-			await _aboutService.UpdateAboutAsync(request);
-			return RedirectToAction("GetAboutList", "About", new { Area = ("Admin") });
+			var validation = await _updateValidator.ValidateAsync(request);
+			if (validation.IsValid)
+			{
+				await _aboutService.UpdateAboutAsync(request);
+				return RedirectToAction("GetAboutList", "About", new { Area = ("Admin") });
+			}
+
+			validation.AddToModelState(this.ModelState);
+
+			return View(request);
+
 		}
 
 
