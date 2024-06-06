@@ -36,28 +36,33 @@
 			<input type="hidden" asp-for="RowVersion" />
 			<input type="hidden" asp-for="FileName" value="FileNameTest1" />
 			<input type="hidden" asp-for="FileType" value="FileTypeTest1" />
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="col-md-12">
 				<div class="form-floating">
 					<input asp-for="FullName" type="text" class="form-control" placeholder="Full Name here">
 					<label asp-for="FullName">FullName</label>
+					<span asp-validation-for="FullName" class="text-danger"></span>
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div class="form-floating">
 					<input asp-for="Title" type="text" class="form-control" placeholder="Title here">
 					<label asp-for="Title">Title</label>
+					<span asp-validation-for="Title" class="text-danger"></span>
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div class="form-floating">
 					<input asp-for="FileName" type="text" class="form-control" placeholder="File Name here">
 					<label asp-for="FileName">File Name</label>
+					<span asp-validation-for="FileName" class="text-danger"></span>
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div class="form-floating">
 					<input asp-for="FileType" type="text" class="form-control" placeholder="File Type here">
 					<label asp-for="FileType">File Type</label>
+					<span asp-validation-for="FileType" class="text-danger"></span>
 				</div>
 			</div>
 

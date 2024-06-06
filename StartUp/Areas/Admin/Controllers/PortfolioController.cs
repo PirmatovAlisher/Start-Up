@@ -1,17 +1,25 @@
 ﻿using EntityLayer.WebApplication.ViewModels.PortfolioVM;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+	[Area("Admin")]
 	public class PortfolioController : Controller
 	{
 		private readonly IPortfolioService _portfolioService;
+		private readonly IValidator<PortfolioAddVM> _addValidator;
+		private readonly IValidator<PortfolioUpdateVM> _updateValidator;
 
-		public PortfolioController(IPortfolioService portfolioService)
+		public PortfolioController(IPortfolioService portfolioService,
+			IValidator<PortfolioAddVM> addValidator,
+			IValidator<PortfolioUpdateVM> updateValidator)
 		{
 			_portfolioService = portfolioService;
+			_addValidator = addValidator;
+			_updateValidator = updateValidator;
 		}
 
 		public async Task<IActionResult> GetPortfolioList()
@@ -32,8 +40,19 @@ namespace StartUp.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddPortfolio(PortfolioAddVM request)
 		{
-			await _portfolioService.AddPortfolioAsync(request);
-			return RedirectToAction("GetPortfolioList", "Portfolio", new { Area = ("Admin") });
+			var validator = await _addValidator.ValidateAsync(request);
+
+			if (validator.IsValid)
+			{
+				await _portfolioService.AddPortfolioAsync(request);
+				return RedirectToAction("GetPortfolioList", "Portfolio", new { Area = ("Admin") });
+			}
+
+			validator.AddToModelState(this.ModelState);
+
+			return View(request);
+
+
 		}
 
 		[HttpGet]
@@ -47,8 +66,19 @@ namespace StartUp.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UpdatePortfolio(PortfolioUpdateVM request)
 		{
-			await _portfolioService.UpdatePortfolioAsync(request);
-			return RedirectToAction("GetPortfolioList", "Portfolio", new { Area = ("Admin") });
+			var validator = await _updateValidator.ValidateAsync(request);
+
+			if (validator.IsValid)
+			{
+				await _portfolioService.UpdatePortfolioAsync(request);
+				return RedirectToAction("GetPortfolioList", "Portfolio", new { Area = ("Admin") });
+			}
+
+			validator.AddToModelState(this.ModelState);
+
+			return View(request);
+
+
 		}
 
 

@@ -1,17 +1,24 @@
 ﻿using EntityLayer.WebApplication.ViewModels.ContactVM;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+	[Area("Admin")]
 	public class ContactController : Controller
 	{
 		private readonly IContactService _contactService;
+		private readonly IValidator<ContactAddVM> _addValidator;
+		private readonly IValidator<ContactUpdateVM> _updateValidator;
 
-		public ContactController(IContactService contactService = null)
+		public ContactController(IContactService contactService,
+			IValidator<ContactUpdateVM> updateValidator, IValidator<ContactAddVM> addValidator)
 		{
 			_contactService = contactService;
+			_updateValidator = updateValidator;
+			_addValidator = addValidator;
 		}
 
 		public async Task<IActionResult> GetContactList()
@@ -32,8 +39,16 @@ namespace StartUp.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddContact(ContactAddVM request)
 		{
-			await _contactService.AddContactAsync(request);
-			return RedirectToAction("GetContactList", "Contact", new { Area = ("Admin") });
+			var validation = await _addValidator.ValidateAsync(request);
+			if (validation.IsValid)
+			{
+				await _contactService.AddContactAsync(request);
+				return RedirectToAction("GetContactList", "Contact", new { Area = ("Admin") });
+			}
+
+			validation.AddToModelState(this.ModelState);
+
+			return View(request);
 		}
 
 		[HttpGet]
@@ -47,8 +62,17 @@ namespace StartUp.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UpdateContact(ContactUpdateVM request)
 		{
-			await _contactService.UpdateContactAsync(request);
-			return RedirectToAction("GetContactList", "Contact", new { Area = ("Admin") });
+			var validation = await _updateValidator.ValidateAsync(request);
+			if (validation.IsValid)
+			{
+				await _contactService.UpdateContactAsync(request);
+				return RedirectToAction("GetContactList", "Contact", new { Area = ("Admin") });
+			}
+
+			validation.AddToModelState(this.ModelState);
+
+			return View(request);
+
 		}
 
 

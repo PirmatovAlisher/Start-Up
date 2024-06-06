@@ -1,17 +1,25 @@
 ﻿using EntityLayer.WebApplication.ViewModels.TestimonialVM;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+	[Area("Admin")]
 	public class TestimonialController : Controller
 	{
 		private readonly ITestimonialService _testimonialService;
+		private readonly IValidator<TestimonialAddVM> _addValidator;
+		private readonly IValidator<TestimonialUpdateVM> _updateValidator;
 
-		public TestimonialController(ITestimonialService testimonialService)
+		public TestimonialController(ITestimonialService testimonialService,
+			IValidator<TestimonialAddVM> addValidator,
+			IValidator<TestimonialUpdateVM> updateValidator)
 		{
 			_testimonialService = testimonialService;
+			_addValidator = addValidator;
+			_updateValidator = updateValidator;
 		}
 
 		public async Task<IActionResult> GetTestimonialList()
@@ -32,8 +40,16 @@ namespace StartUp.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddTestimonial(TestimonialAddVM request)
 		{
-			await _testimonialService.AddTestimonialAsync(request);
-			return RedirectToAction("GetTestimonialList", "Testimonial", new { Area = ("Admin") });
+			var validator = await _addValidator.ValidateAsync(request);
+			if (validator.IsValid)
+			{
+				await _testimonialService.AddTestimonialAsync(request);
+				return RedirectToAction("GetTestimonialList", "Testimonial", new { Area = ("Admin") });
+			}
+
+			validator.AddToModelState(this.ModelState);
+			return View(request);
+
 		}
 
 		[HttpGet]
@@ -47,8 +63,17 @@ namespace StartUp.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> UpdateTestimonial(TestimonialUpdateVM request)
 		{
-			await _testimonialService.UpdateTestimonialAsync(request);
-			return RedirectToAction("GetTestimonialList", "Testimonial", new { Area = ("Admin") });
+			var validator = await _updateValidator.ValidateAsync(request);
+			if (validator.IsValid)
+			{
+				await _testimonialService.UpdateTestimonialAsync(request);
+				return RedirectToAction("GetTestimonialList", "Testimonial", new { Area = ("Admin") });
+			}
+
+			validator.AddToModelState(this.ModelState);
+
+			return View(request);
+
 		}
 
 
