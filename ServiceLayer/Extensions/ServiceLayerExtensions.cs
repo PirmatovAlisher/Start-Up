@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
+using ServiceLayer.FluentValidation.WebApplication.HomePageValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +29,13 @@ namespace ServiceLayer.Extensions
                     services.AddScoped(iServiceType, serviceType);
                 }
             }
+
+            services.AddFluentValidationAutoValidation(opt =>
+            {
+                opt.DisableDataAnnotationsValidation = true;
+            });
+
+            services.AddValidatorsFromAssemblyContaining<HomePageAddValidation>();
 
             return services;
         }
