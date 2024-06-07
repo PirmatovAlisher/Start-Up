@@ -1,5 +1,6 @@
 ﻿using EntityLayer.WebApplication.ViewModels.ServiceVM;
 using FluentValidation;
+using ServiceLayer.Messages.WebApplication;
 
 namespace ServiceLayer.FluentValidation.WebApplication.ServiceValidation
 {
@@ -8,19 +9,19 @@ namespace ServiceLayer.FluentValidation.WebApplication.ServiceValidation
 		public ServiceAddValidation()
 		{
 			RuleFor(x => x.Name).
-				NotNull().
-				NotEmpty().
-				MaximumLength(100);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Name")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Name")).
+				MaximumLength(100).WithMessage(ValidationMessages.MaximumCharacterAllowance("Name", 100));
 
 			RuleFor(x => x.Description).
-				NotNull().
-				NotEmpty().
-				MaximumLength(2000);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Description")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Description")).
+				MaximumLength(2000).WithMessage(ValidationMessages.MaximumCharacterAllowance("Description", 2000));
 
 			RuleFor(x => x.Icon).
-				NotNull().
-				NotEmpty().
-				MaximumLength(100);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Icon")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Icon")).
+				MaximumLength(100).WithMessage(ValidationMessages.MaximumCharacterAllowance("Icon", 100));
 		}
 	}
 }

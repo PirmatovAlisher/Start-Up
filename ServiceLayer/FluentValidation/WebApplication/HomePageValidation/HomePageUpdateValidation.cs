@@ -1,5 +1,6 @@
 ﻿using EntityLayer.WebApplication.ViewModels.HomePageVM;
 using FluentValidation;
+using ServiceLayer.Messages.WebApplication;
 
 namespace ServiceLayer.FluentValidation.WebApplication.HomePageValidation
 {
@@ -8,18 +9,18 @@ namespace ServiceLayer.FluentValidation.WebApplication.HomePageValidation
 		public HomePageUpdateValidation()
 		{
 			RuleFor(x => x.Header).
-				NotNull().
-				NotEmpty().
-				MaximumLength(200);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Header")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Header")).
+				MaximumLength(200).WithMessage(ValidationMessages.MaximumCharacterAllowance("Header", 200));
 
 			RuleFor(x => x.Description).
-				NotNull().
-				NotEmpty().
-				MaximumLength(2000);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Description")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Description")).
+				MaximumLength(2000).WithMessage(ValidationMessages.MaximumCharacterAllowance("Description", 2000));
 
 			RuleFor(x => x.VideoLink).
-				NotNull().
-				NotEmpty();
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Video Link")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Video Link"));
 		}
 	}
 }

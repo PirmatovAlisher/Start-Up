@@ -1,5 +1,6 @@
 ﻿using EntityLayer.WebApplication.ViewModels.TestimonialVM;
 using FluentValidation;
+using ServiceLayer.Messages.WebApplication;
 
 namespace ServiceLayer.FluentValidation.WebApplication.TestimonialValidation
 {
@@ -8,27 +9,27 @@ namespace ServiceLayer.FluentValidation.WebApplication.TestimonialValidation
 		public TestimonialUpdateValidation()
 		{
 			RuleFor(p => p.Comment).
-				NotEmpty().
-				NotNull().
-				MaximumLength(2000);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Comment")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Comment")).
+				MaximumLength(2000).WithMessage(ValidationMessages.MaximumCharacterAllowance("Comment", 2000));
 
 			RuleFor(p => p.FullName).
-				NotEmpty().
-				NotNull().
-				MaximumLength(100);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Full Name")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Full Name")).
+				MaximumLength(100).WithMessage(ValidationMessages.MaximumCharacterAllowance("Full Name", 100));
 
 			RuleFor(p => p.Title).
-				NotEmpty().
-				NotNull().
-				MaximumLength(100);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Title")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Title")).
+				MaximumLength(100).WithMessage(ValidationMessages.MaximumCharacterAllowance("Title", 100));
 
 			RuleFor(p => p.FileName).
-				NotEmpty().
-				NotNull();
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("File Name")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("File Name"));
 
 			RuleFor(p => p.FileType).
-				NotEmpty().
-				NotNull();
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("File Type")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("File Type"));
 		}
 	}
 }

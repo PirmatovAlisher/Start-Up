@@ -1,31 +1,27 @@
 ﻿using EntityLayer.WebApplication.ViewModels.ServiceVM;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ServiceLayer.Messages.WebApplication;
 
 namespace ServiceLayer.FluentValidation.WebApplication.ServiceValidation
 {
 	public class ServiceUpdateValidation : AbstractValidator<ServiceUpdateVM>
 	{
-        public ServiceUpdateValidation()
-        {
+		public ServiceUpdateValidation()
+		{
 			RuleFor(x => x.Name).
-				NotNull().
-				NotEmpty().
-				MaximumLength(100);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Name")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Name")).
+				MaximumLength(100).WithMessage(ValidationMessages.MaximumCharacterAllowance("Name", 100));
 
 			RuleFor(x => x.Description).
-				NotNull().
-				NotEmpty().
-				MaximumLength(2000);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Description")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Description")).
+				MaximumLength(2000).WithMessage(ValidationMessages.MaximumCharacterAllowance("Description", 2000));
 
 			RuleFor(x => x.Icon).
-				NotNull().
-				NotEmpty().
-				MaximumLength(100);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Icon")).
+				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Icon")).
+				MaximumLength(100).WithMessage(ValidationMessages.MaximumCharacterAllowance("Icon", 100));
 		}
-    }
+	}
 }
