@@ -21,11 +21,11 @@ namespace EntityLayer.WebApplication.Entities
 
         public int HardWorkers {  get; set; }
 
-        public string FileName { get; set; } = string.Empty;
+        public string FileName { get; set; } = null!;
 
-        public string FileType { get; set; } = string.Empty;
+		public string FileType { get; set; } = null!;
 
-        public int SocialMediaId { get; set; }
+		public int SocialMediaId { get; set; }
         public SocialMedia SocialMedia { get; set; } = null!;
     }
 }
