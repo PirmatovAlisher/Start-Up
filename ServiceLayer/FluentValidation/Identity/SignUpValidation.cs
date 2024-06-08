@@ -21,8 +21,7 @@ namespace ServiceLayer.FluentValidation.Identity
 
 			RuleFor(x => x.Password).
 				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Password")).
-				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Password")).
-				Equal(c => c.ConfirmPassword);
+				NotEmpty().WithMessage(ValidationMessages.NulEmptyMessage("Password"));
 
 			RuleFor(x => x.ConfirmPassword).
 				NotNull().WithMessage(ValidationMessages.NulEmptyMessage("Confirm Password")).
