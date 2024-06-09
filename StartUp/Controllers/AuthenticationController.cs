@@ -6,7 +6,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using ServiceLayer.Helpers.Identity;
+using ServiceLayer.Helpers.Identity.ModelStateHelper;
 
 namespace StartUp.Controllers
 {
@@ -18,18 +18,21 @@ namespace StartUp.Controllers
 		private readonly IMapper _mapper;
 		private readonly IValidator<SignUpVM> _signUpValidator;
 		private readonly IValidator<LogInVM> _logInValidator;
+		private readonly IValidator<ForgotPasswordVM> _forgotPasswordValidator;
 
 		public AuthenticationController(UserManager<AppUser> userManager,
 										IValidator<SignUpVM> signUpValidator,
 										IMapper mapper,
 										SignInManager<AppUser> signInManager,
-										IValidator<LogInVM> logInValidator)
+										IValidator<LogInVM> logInValidator,
+										IValidator<ForgotPasswordVM> forgotPasswordValidator)
 		{
 			_userManager = userManager;
 			_signUpValidator = signUpValidator;
 			_mapper = mapper;
 			_signInManager = signInManager;
 			_logInValidator = logInValidator;
+			_forgotPasswordValidator = forgotPasswordValidator;
 		}
 
 		[HttpGet]
@@ -105,6 +108,37 @@ namespace StartUp.Controllers
 			ViewBag.Result = "Failed Attempt";
 			ModelState.AddModelErrorList(new List<string> { $"Email or Password is wrong! Failed attempt " +
 				$"{await _userManager.GetAccessFailedCountAsync(hasUser)}" });
+
+			return View(request);
+		}
+
+		[HttpGet]
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ForgotPassword(ForgotPasswordVM request)
+		{
+			var validation = await _forgotPasswordValidator.ValidateAsync(request);
+			if (!validation.IsValid)
+			{
+				validation.AddToModelState(this.ModelState);
+				return View(request);
+			}
+
+			var hasUser = await _userManager.FindByEmailAsync(request.Email);
+			if (hasUser == null)
+			{
+				ViewBag.Result = "Failed";
+				ModelState.AddModelErrorList(new List<string> { "User does not exist" });
+				return View(request);
+			}
+
+			string resetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
+			var passwordResetLink = Url.Action("ResetPassword", "Authentication",
+									new { userId = hasUser.Id, Token = resetToken, HttpContext.Request.Scheme });
 
 			return View(request);
 		}
