@@ -1,11 +1,13 @@
 ﻿using EntityLayer.WebApplication.ViewModels.CategortVM;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
+	[Authorize]
 	[Area("Admin")]
 	public class CategoryController : Controller
 	{

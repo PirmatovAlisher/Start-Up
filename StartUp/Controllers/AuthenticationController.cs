@@ -77,7 +77,6 @@ namespace StartUp.Controllers
 			var validator = await _logInValidator.ValidateAsync(request);
 			if (!validator.IsValid)
 			{
-				ViewBag.Result = "Failed";
 				validator.AddToModelState(this.ModelState);
 				return View(request);
 			}
