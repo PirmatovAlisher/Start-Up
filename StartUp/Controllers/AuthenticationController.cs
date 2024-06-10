@@ -6,6 +6,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ServiceLayer.Helpers.Identity.EmailHelper;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
 
 namespace StartUp.Controllers
@@ -19,13 +20,16 @@ namespace StartUp.Controllers
 		private readonly IValidator<SignUpVM> _signUpValidator;
 		private readonly IValidator<LogInVM> _logInValidator;
 		private readonly IValidator<ForgotPasswordVM> _forgotPasswordValidator;
+		private readonly IEmailSendMethod _emailSendMethod;
+
 
 		public AuthenticationController(UserManager<AppUser> userManager,
 										IValidator<SignUpVM> signUpValidator,
 										IMapper mapper,
 										SignInManager<AppUser> signInManager,
 										IValidator<LogInVM> logInValidator,
-										IValidator<ForgotPasswordVM> forgotPasswordValidator)
+										IValidator<ForgotPasswordVM> forgotPasswordValidator,
+										IEmailSendMethod emailSendMethod)
 		{
 			_userManager = userManager;
 			_signUpValidator = signUpValidator;
@@ -33,6 +37,7 @@ namespace StartUp.Controllers
 			_signInManager = signInManager;
 			_logInValidator = logInValidator;
 			_forgotPasswordValidator = forgotPasswordValidator;
+			_emailSendMethod = emailSendMethod;
 		}
 
 		[HttpGet]
@@ -140,7 +145,9 @@ namespace StartUp.Controllers
 			var passwordResetLink = Url.Action("ResetPassword", "Authentication",
 									new { userId = hasUser.Id, Token = resetToken, HttpContext.Request.Scheme });
 
-			return View(request);
+			await _emailSendMethod.SendResetPasswordLinkWithToken(request.Email, passwordResetLink!);
+
+			return RedirectToAction("LogIn", "Authentication");
 		}
 	}
 }
