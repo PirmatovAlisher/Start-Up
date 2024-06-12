@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using ServiceLayer.Helpers.Identity.EmailHelper;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
+using ServiceLayer.Services.Identity.Abstract;
 
 namespace StartUp.Controllers
 {
@@ -23,6 +24,7 @@ namespace StartUp.Controllers
 		private readonly IValidator<ForgotPasswordVM> _forgotPasswordValidator;
 		private readonly IValidator<ResetPasswordVM> _resetPasswordValidator;
 		private readonly IEmailSendMethod _emailSendMethod;
+		private readonly IAuthenticationCustomService _authenticationService;
 
 
 		public AuthenticationController(UserManager<AppUser> userManager,
@@ -32,7 +34,8 @@ namespace StartUp.Controllers
 										IValidator<LogInVM> logInValidator,
 										IValidator<ForgotPasswordVM> forgotPasswordValidator,
 										IEmailSendMethod emailSendMethod,
-										IValidator<ResetPasswordVM> resetPasswordValidator)
+										IValidator<ResetPasswordVM> resetPasswordValidator,
+										IAuthenticationCustomService authenticationService)
 		{
 			_userManager = userManager;
 			_signUpValidator = signUpValidator;
@@ -42,6 +45,7 @@ namespace StartUp.Controllers
 			_forgotPasswordValidator = forgotPasswordValidator;
 			_emailSendMethod = emailSendMethod;
 			_resetPasswordValidator = resetPasswordValidator;
+			_authenticationService = authenticationService;
 		}
 
 		[HttpGet]
@@ -145,11 +149,12 @@ namespace StartUp.Controllers
 				return View(request);
 			}
 
-			string resetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
-			var passwordResetLink = Url.Action("ResetPassword", "Authentication",
-									new { userId = hasUser.Id, Token = resetToken }, HttpContext.Request.Scheme);
+			await _authenticationService.CreateResetCredentialsAndSend(hasUser, HttpContext, Url, request);
+			//string resetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
+			//var passwordResetLink = Url.Action("ResetPassword", "Authentication",
+			//						new { userId = hasUser.Id, Token = resetToken }, HttpContext.Request.Scheme);
 
-			await _emailSendMethod.SendResetPasswordLinkWithToken(request.Email, passwordResetLink!);
+			//await _emailSendMethod.SendResetPasswordLinkWithToken(request.Email, passwordResetLink!);
 
 			return RedirectToAction("LogIn", "Authentication");
 		}
@@ -211,6 +216,11 @@ namespace StartUp.Controllers
 
 
 
+		}
+
+		public IActionResult AccessDenied()
+		{
+			return View();
 		}
 	}
 }
