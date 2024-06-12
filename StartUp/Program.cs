@@ -40,6 +40,13 @@ namespace StartUp
                     areaName: "Admin",
                     pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}"
                     );
+
+                endpoints.MapAreaControllerRoute(
+                    name: "User",
+                    areaName: "User",
+                    pattern: "User/{controller=Dashboard}/{action=Index}/{id?}"
+					);
+
                 endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
