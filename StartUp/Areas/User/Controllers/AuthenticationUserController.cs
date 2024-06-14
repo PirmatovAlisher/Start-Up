@@ -86,7 +86,7 @@ namespace StartUp.Areas.User.Controllers
 
 			var mappedUser = _mapper.Map(request, user);
 			var userUpdate = await _userManager.UpdateAsync(mappedUser);
-			if (userUpdate.Succeeded)
+			if (!userUpdate.Succeeded)
 			{
 				if (request.Photo != null)
 				{
