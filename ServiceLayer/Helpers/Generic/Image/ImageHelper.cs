@@ -24,11 +24,11 @@ namespace ServiceLayer.Helpers.Generic.Image
 		public ImageHelper(IHostEnvironment hostEnvironment)
 		{
 			_hostEnvironment = hostEnvironment;
-			wwwRoot = _hostEnvironment.ContentRootPath + "wwwroot/";
+			wwwRoot = _hostEnvironment.ContentRootPath + "/wwwroot/";
 		}
 
 
-		public async Task<ImageUploadModel> ImageUpload(string name, IFormFile imageFile, ImageType imageType, string? folderName)
+		public async Task<ImageUploadModel> ImageUpload(IFormFile imageFile, ImageType imageType, string? folderName)
 		{
 			if (folderName == null)
 			{
@@ -57,15 +57,15 @@ namespace ServiceLayer.Helpers.Generic.Image
 				Directory.CreateDirectory($"{wwwRoot}/{imageFolder}/{folderName}");
 			}
 
-			string fileExtension = Path.GetExtension(imageFile.Name).ToLower();
-			if (fileExtension != "jpg" || fileExtension != "jpeg")
+			string fileExtension = Path.GetExtension(imageFile.FileName).ToLower();
+			if (fileExtension != ".jpg" && fileExtension != ".jpeg")
 			{
 				return new ImageUploadModel { Error = "Please upload file only in .jpg or .jpeg format" };
 			}
 
 			var dateTime = DateTime.Now;
 
-			var newFileName = folderName + "_" + dateTime.Microsecond.ToString();
+			var newFileName = folderName + "_" + dateTime.Microsecond.ToString() + fileExtension;
 
 			string path = Path.Combine($"{wwwRoot}/{imageFolder}/{folderName}", newFileName);
 
