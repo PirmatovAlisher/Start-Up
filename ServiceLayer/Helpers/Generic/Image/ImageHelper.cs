@@ -14,12 +14,12 @@ namespace ServiceLayer.Helpers.Generic.Image
 	{
 		private readonly IHostEnvironment _hostEnvironment;
 		private readonly string wwwRoot;
-		private readonly string imageFolder = "Images";
-		private readonly string identityFolder = "User";
-		private readonly string aboutFolder = "AboutUs";
-		private readonly string portfolioFolder = "Portfolios";
-		private readonly string teamFolder = "Team";
-		private readonly string testimonialFolder = "Testimonials";
+		private readonly string imageFolder = "images";
+		private readonly string identityFolder = "user";
+		private readonly string aboutFolder = "aboutUs";
+		private readonly string portfolioFolder = "portfolios";
+		private readonly string teamFolder = "team";
+		private readonly string testimonialFolder = "testimonials";
 
 		public ImageHelper(IHostEnvironment hostEnvironment)
 		{
@@ -69,7 +69,7 @@ namespace ServiceLayer.Helpers.Generic.Image
 
 			string path = Path.Combine($"{wwwRoot}/{imageFolder}/{folderName}", newFileName);
 
-			await using var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, false);
+			await using var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: false);
 
 			await imageFile.CopyToAsync(stream);
 			await stream.FlushAsync();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CoreLayer.Enumerators;
 using EntityLayer.Identity.Entities;
 using EntityLayer.Identity.ViewModels;
 using FluentValidation;
@@ -6,6 +7,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Helpers.Generic.Image;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
 
 namespace StartUp.Areas.User.Controllers
@@ -18,13 +20,15 @@ namespace StartUp.Areas.User.Controllers
 		private readonly SignInManager<AppUser> _signInManager;
 		private readonly IMapper _mapper;
 		private readonly IValidator<UserEditVM> _userEditValidator;
+		private readonly IImageHelper _imageHelper;
 
-		public AuthenticationUserController(UserManager<AppUser> userManager, IMapper mapper, IValidator<UserEditVM> userEditValidator, SignInManager<AppUser> signInManager)
+		public AuthenticationUserController(UserManager<AppUser> userManager, IMapper mapper, IValidator<UserEditVM> userEditValidator, SignInManager<AppUser> signInManager, IImageHelper imageHelper)
 		{
 			_userManager = userManager;
 			_mapper = mapper;
 			_userEditValidator = userEditValidator;
 			_signInManager = signInManager;
+			_imageHelper = imageHelper;
 		}
 
 
@@ -56,7 +60,7 @@ namespace StartUp.Areas.User.Controllers
 			{
 				ViewBag.Result = "Failed Password";
 				ModelState.AddModelErrorList(new List<string> { "Wrong Password" });
-				return View();
+				return Redirect(nameof(UserEdit));
 			}
 
 			if (request.NewPassword != null)
@@ -66,7 +70,7 @@ namespace StartUp.Areas.User.Controllers
 				{
 					ViewBag.Result = "New Password Failed";
 					ModelState.AddModelErrorList(passwordChange.Errors.ToList());
-					return View();
+					return Redirect(nameof(UserEdit));
 				}
 			}
 
@@ -75,8 +79,22 @@ namespace StartUp.Areas.User.Controllers
 
 			if (request.Photo != null)
 			{
-				request.FileName = DateTime.Now.ToString();
-				request.FileType = DateTime.Now.ToString();
+				var image = await _imageHelper.ImageUpload(request.Photo, ImageType.identity, null);
+				if (image.Error != null)
+				{
+					if (request.NewPassword != null)
+					{
+						await _userManager.ChangePasswordAsync(user!, request.NewPassword, request.Password);
+						await _userManager.UpdateSecurityStampAsync(user);
+						await _signInManager.SignOutAsync();
+						await _signInManager.SignInAsync(user, false);
+					}
+
+					return Redirect(nameof(UserEdit));
+				}
+
+				request.FileName = image.FileName;
+				request.FileType = request.Photo.ContentType;
 			}
 			else
 			{
@@ -86,13 +104,14 @@ namespace StartUp.Areas.User.Controllers
 
 			var mappedUser = _mapper.Map(request, user);
 			var userUpdate = await _userManager.UpdateAsync(mappedUser);
-			if (!userUpdate.Succeeded)
+
+			if (userUpdate.Succeeded)
 			{
 				if (request.Photo != null)
 				{
 					if (oldFileName != null)
 					{
-						//Delete image method
+						_imageHelper.DeleteImage(oldFileName);
 					}
 				}
 
@@ -104,7 +123,7 @@ namespace StartUp.Areas.User.Controllers
 
 			if (request.FileName != null)
 			{
-				//Image delete
+				_imageHelper.DeleteImage(request.FileName);
 			}
 
 			if (request.NewPassword != null)
@@ -116,8 +135,9 @@ namespace StartUp.Areas.User.Controllers
 			}
 
 			ViewBag.UserName = user.UserName;
+			//ViewBag.Id = user.Id;
 
-			return View();
+			return Redirect(nameof(UserEdit));
 		}
 	}
 }

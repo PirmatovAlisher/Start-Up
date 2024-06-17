@@ -27,7 +27,7 @@ namespace StartUp.TagHelpers
 
 			if (!string.IsNullOrEmpty(user!.FileName))
 			{
-				output.Attributes.SetAttribute("src", $"/images/{FileName}");
+				output.Attributes.SetAttribute("src", $"/images/{user.FileName}");
 				return base.ProcessAsync(context, output);
 			}
 
