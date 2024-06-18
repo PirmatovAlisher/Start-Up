@@ -39,10 +39,29 @@
 		<div class="d-flex align-items-center justify-content-between">
 			<a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="logo d-flex align-items-center">
 				<img src="~/NiceAdmin/assets/img/logo.png" alt="">
-				<span class="d-none d-lg-block">Admin</span>
+				<span class="d-none d-lg-block">@User.Identity!.Name</span>
 			</a>
 			<i class="bi bi-list toggle-sidebar-btn"></i>
 		</div><!-- End Logo -->
+
+		<nav class="header-nav ms-auto">
+			<ul class="d-flex align-items-center">
+
+				<li class="nav-item">
+					<a asp-area="User" asp-controller="Dashboard" asp-action="Index" class="nav-link nav-icon">
+						<i class="bi bi-person-gear"></i>
+					</a><!-- End Notification Icon -->
+				</li><!-- End Notification Nav -->
+
+				<li class="nav-item">
+					<a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link nav-icon">
+						<i class="bi bi-house"></i>
+					</a>
+				</li>
+
+			</ul>
+		</nav><!-- End Icons Navigation -->
+
 
 	</header>
 	<!-- End Header -->
@@ -113,18 +132,6 @@
 					<span>Testimonial</span>
 				</a>
 			</li><!-- End Testimonial Section -->
-
-
-			<li class="nav-heading">Settings</li>
-
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
-					<i class="bi bi-gear-fill"></i>
-					<span>User Settings</span>
-				</a>
-			</li><!-- End Icons Nav -->
-
-
 		</ul>
 
 	</aside>
