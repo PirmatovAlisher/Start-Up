@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Context;
 using ServiceLayer.Customization.Identity.ErrorDescriber;
+using ServiceLayer.Customization.Identity.Validators;
 using ServiceLayer.Helpers.Identity.EmailHelper;
 
 namespace ServiceLayer.Extensions.Identity
@@ -25,7 +26,9 @@ namespace ServiceLayer.Extensions.Identity
 			AddRoleManager<RoleManager<AppRole>>().
 			AddEntityFrameworkStores<AppDbContext>().
 			AddDefaultTokenProviders().
-			AddErrorDescriber<LocalizationErrorDescriber>();
+			AddErrorDescriber<LocalizationErrorDescriber>().
+			AddPasswordValidator<CustomPasswordValidator>().
+			AddUserValidator<CustomUserValidator>();
 
 
 			services.ConfigureApplicationCookie(opt =>
