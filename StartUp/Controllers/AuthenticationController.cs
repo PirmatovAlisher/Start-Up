@@ -24,7 +24,7 @@ namespace StartUp.Controllers
 		private readonly IValidator<ForgotPasswordVM> _forgotPasswordValidator;
 		private readonly IValidator<ResetPasswordVM> _resetPasswordValidator;
 		private readonly IEmailSendMethod _emailSendMethod;
-		private readonly IAuthenticationCustomService _authenticationService;
+		private readonly IAuthenticationMainService _authenticationService;
 
 
 		public AuthenticationController(UserManager<AppUser> userManager,
@@ -35,7 +35,7 @@ namespace StartUp.Controllers
 										IValidator<ForgotPasswordVM> forgotPasswordValidator,
 										IEmailSendMethod emailSendMethod,
 										IValidator<ResetPasswordVM> resetPasswordValidator,
-										IAuthenticationCustomService authenticationService)
+										IAuthenticationMainService authenticationService)
 		{
 			_userManager = userManager;
 			_signUpValidator = signUpValidator;

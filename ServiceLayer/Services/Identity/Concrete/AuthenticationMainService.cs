@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Services.Identity.Concrete
 {
-	public class AuthenticationCustomService : IAuthenticationCustomService
+	public class AuthenticationMainService : IAuthenticationMainService
 	{
 		private readonly UserManager<AppUser> _userManager;
 		private readonly IEmailSendMethod _emailSendMethod;
 		private readonly HttpContext _httpContext;
 
-		public AuthenticationCustomService(UserManager<AppUser> userManager, IEmailSendMethod emailSendMethod)
+		public AuthenticationMainService(UserManager<AppUser> userManager, IEmailSendMethod emailSendMethod)
 		{
 			_userManager = userManager;
 			_emailSendMethod = emailSendMethod;
