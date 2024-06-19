@@ -11,14 +11,14 @@
 <nav>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Portfolio" asp-action="GetPortfolioList">Portfolio</a></li>
+		<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Portfolio" asp-action="GetPortfolioList">Portfolio</a></li>
 		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Portfolio" asp-action="UpdatePortfolio">Update Portfolio</a></li>
 	</ol>
 </nav>
 <!-- End BreadCrum -->
 <!-- Card with an image on top -->
 <div class="card">
-	<img src="~/NiceAdmin/assets/img/card.jpg" class="card-img-top" alt="...">
+	<img src="~/images/@Model.FileName" class="card-img-top" alt="...">
 	<div class="card-body">
 		<h5 class="card-title">@Model.Title</h5>
 	</div>
@@ -35,7 +35,6 @@
 			<input type="hidden" asp-for="RowVersion" />
 			<input type="hidden" asp-for="CategoryId"/>
 			<input type="hidden" asp-for="UpdatedDate" value="@DateTime.Now" />
-			@* <input type="hidden" asp-for="UpdatedDate" value="@DateTime.Now"/> *@
 			<div class="col-md-12">
 				<div class="form-floating">
 					<input asp-for="Title" type="text" class="form-control" placeholder="Title here">

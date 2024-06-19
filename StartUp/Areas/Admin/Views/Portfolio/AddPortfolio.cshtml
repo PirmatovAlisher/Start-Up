@@ -11,7 +11,7 @@
 <nav>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Portfolio" asp-action="GetPortfolioList">Portfolio</a></li>
+		<li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Portfolio" asp-action="GetPortfolioList">Portfolio</a></li>
 		<li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Portfolio" asp-action="AddPortfolio">Add Portfolio</a></li>
 	</ol>
 </nav>
@@ -25,8 +25,6 @@
 		<!-- Floating Labels Form -->
 		<form asp-area="Admin" asp-controller="Portfolio" asp-action="AddPortfolio" method="post" class="row g-3" enctype="multipart/form-data">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" asp-for="FileName" value="FileNameTest1" />
-			<input type="hidden" asp-for="FileType" value="FileTypeTest1" />
 			<input type="hidden" asp-for="CategoryId" value="1" />
 			<div class="col-md-12">
 				<div class="form-floating">
