@@ -44,6 +44,17 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 		public async Task AddAboutAsync(AboutAddVM request)
 		{
+			var imageResult = await _imageHelper.ImageUpload(request.Photo, ImageType.about, null);
+
+			if (imageResult.Error != null)
+			{
+				return;
+			}
+
+			request.FileName = imageResult.FileName!;
+			request.FileType = imageResult.FileType!;
+
+
 			var about = _mapper.Map<About>(request);
 			await _repository.AddEntityAsync(about);
 			await _unitOfWork.CommitAsync();
@@ -54,6 +65,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var about = await _repository.GetEntityByIdAsync(id);
 			_repository.DeleteEntity(about);
 			await _unitOfWork.CommitAsync();
+			_imageHelper.DeleteImage(about.FileName);
 		}
 
 		public async Task<AboutUpdateVM> GetAboutById(int id)
@@ -66,10 +78,30 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 		public async Task UpdateAboutAsync(AboutUpdateVM request)
 		{
+
+			var oldAbout = await _repository.Where(x => x.Id == request.Id).AsNoTracking().FirstAsync();
+
+			if (request.Photo != null)
+			{
+				var imageResult = await _imageHelper.ImageUpload(request.Photo, ImageType.about, null);
+
+				if (imageResult.Error != null)
+					return;
+
+				request.FileName = imageResult.FileName!;
+				request.FileType = imageResult.FileType!;
+			}
+
 			var about = _mapper.Map<About>(request);
 
 			_repository.UpdateEntity(about);
 			await _unitOfWork.CommitAsync();
+
+
+			if (request.Photo != null)
+			{
+				_imageHelper.DeleteImage(oldAbout.FileName);
+			}
 		}
 	}
 }
