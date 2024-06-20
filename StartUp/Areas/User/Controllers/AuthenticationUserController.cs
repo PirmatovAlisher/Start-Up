@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
 using ServiceLayer.Services.Identity.Concrete;
 
@@ -17,14 +18,17 @@ namespace StartUp.Areas.User.Controllers
 		private readonly UserManager<AppUser> _userManager;
 		private readonly IValidator<UserEditVM> _userEditValidator;
 		private readonly IAuthenticationUserService _authenticationUserService;
+		private readonly IToastNotification _toasty;
 
 		public AuthenticationUserController(UserManager<AppUser> userManager,
 											IValidator<UserEditVM> userEditValidator,
-											IAuthenticationUserService authenticationUserService)
+											IAuthenticationUserService authenticationUserService,
+											IToastNotification toasty)
 		{
 			_userManager = userManager;
 			_userEditValidator = userEditValidator;
 			_authenticationUserService = authenticationUserService;
+			_toasty = toasty;
 		}
 
 
@@ -58,7 +62,7 @@ namespace StartUp.Areas.User.Controllers
 			}
 
 			ViewBag.UserName = user!.UserName;
-
+			_toasty.AddInfoToastMessage($"{user.UserName} has been updated", new ToastrOptions { Title = "Congratulations" });
 			return RedirectToAction("Index", "Dashboard", new { Area = "User" });
 		}
 	}

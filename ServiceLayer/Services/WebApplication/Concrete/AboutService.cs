@@ -3,7 +3,9 @@ using AutoMapper.QueryableExtensions;
 using CoreLayer.Enumerators;
 using EntityLayer.WebApplication.Entities;
 using EntityLayer.WebApplication.ViewModels.AboutVM;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using RepositoryLayer.Repositories.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
 using ServiceLayer.Helpers.Generic.Image;
@@ -17,13 +19,15 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 		private readonly IMapper _mapper;
 		private readonly IGenericRepositories<About> _repository;
 		private readonly IImageHelper _imageHelper;
+		private readonly IToastNotification _toasty;
 
-		public AboutService(IUnitOfWork unitOfWork, IMapper mapper, IImageHelper imageHelper)
+		public AboutService(IUnitOfWork unitOfWork, IMapper mapper, IImageHelper imageHelper, IToastNotification toasty)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 			_repository = _unitOfWork.GetGenericRepository<About>();
 			_imageHelper = imageHelper;
+			_toasty = toasty;
 		}
 
 
@@ -48,6 +52,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 			if (imageResult.Error != null)
 			{
+				_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = "I am sorry!" });
 				return;
 			}
 
@@ -58,6 +63,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var about = _mapper.Map<About>(request);
 			await _repository.AddEntityAsync(about);
 			await _unitOfWork.CommitAsync();
+			_toasty.AddSuccessToastMessage("Your about section has been submitted", new ToastrOptions { Title = "Congratulations" });
 		}
 
 		public async Task DeleteAboutAsync(int id)
@@ -66,6 +72,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			_repository.DeleteEntity(about);
 			await _unitOfWork.CommitAsync();
 			_imageHelper.DeleteImage(about.FileName);
+			_toasty.AddWarningToastMessage("Your about section has been deleted", new ToastrOptions { Title = "Congratulations" });
 		}
 
 		public async Task<AboutUpdateVM> GetAboutById(int id)
@@ -86,7 +93,10 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 				var imageResult = await _imageHelper.ImageUpload(request.Photo, ImageType.about, null);
 
 				if (imageResult.Error != null)
+				{
+					_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = "I am sorry!" });
 					return;
+				}
 
 				request.FileName = imageResult.FileName!;
 				request.FileType = imageResult.FileType!;
@@ -102,6 +112,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			{
 				_imageHelper.DeleteImage(oldAbout.FileName);
 			}
+			_toasty.AddInfoToastMessage("Your about section has been updated", new ToastrOptions { Title = "Congratulations" });
+
 		}
 	}
 }
