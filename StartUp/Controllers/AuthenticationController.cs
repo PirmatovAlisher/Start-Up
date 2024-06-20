@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NToastNotify;
 using ServiceLayer.Helpers.Identity.EmailHelper;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
 using ServiceLayer.Services.Identity.Abstract;
@@ -25,6 +26,7 @@ namespace StartUp.Controllers
 		private readonly IValidator<ResetPasswordVM> _resetPasswordValidator;
 		private readonly IEmailSendMethod _emailSendMethod;
 		private readonly IAuthenticationMainService _authenticationService;
+		private readonly IToastNotification _toasty;
 
 
 		public AuthenticationController(UserManager<AppUser> userManager,
@@ -35,7 +37,8 @@ namespace StartUp.Controllers
 										IValidator<ForgotPasswordVM> forgotPasswordValidator,
 										IEmailSendMethod emailSendMethod,
 										IValidator<ResetPasswordVM> resetPasswordValidator,
-										IAuthenticationMainService authenticationService)
+										IAuthenticationMainService authenticationService,
+										IToastNotification toasty)
 		{
 			_userManager = userManager;
 			_signUpValidator = signUpValidator;
@@ -46,6 +49,7 @@ namespace StartUp.Controllers
 			_emailSendMethod = emailSendMethod;
 			_resetPasswordValidator = resetPasswordValidator;
 			_authenticationService = authenticationService;
+			_toasty = toasty;
 		}
 
 		[HttpGet]
@@ -76,6 +80,7 @@ namespace StartUp.Controllers
 				return View(request);
 			}
 
+			_toasty.AddSuccessToastMessage($"{user.UserName} has been created", new ToastrOptions { Title = "Congratulations" });
 			return RedirectToAction("Login", "Authentication");
 		}
 
@@ -88,7 +93,7 @@ namespace StartUp.Controllers
 		[HttpPost]
 		public async Task<IActionResult> LogIn(LogInVM request, string? returnUrl = null)
 		{
-			returnUrl = returnUrl ?? Url.Action("Index", "Dashboard", new { Area = "Admin" });
+			returnUrl = returnUrl ?? Url.Action("Index", "Dashboard", new { Area = "User" });
 
 			var validator = await _logInValidator.ValidateAsync(request);
 			if (!validator.IsValid)
@@ -109,6 +114,7 @@ namespace StartUp.Controllers
 
 			if (logInResult.Succeeded)
 			{
+				_toasty.AddSuccessToastMessage("You have logged in", new ToastrOptions { Title = "Congratulations" });
 				return Redirect(returnUrl!);
 			}
 
@@ -150,11 +156,6 @@ namespace StartUp.Controllers
 			}
 
 			await _authenticationService.CreateResetCredentialsAndSend(hasUser, HttpContext, Url, request);
-			//string resetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
-			//var passwordResetLink = Url.Action("ResetPassword", "Authentication",
-			//						new { userId = hasUser.Id, Token = resetToken }, HttpContext.Request.Scheme);
-
-			//await _emailSendMethod.SendResetPasswordLinkWithToken(request.Email, passwordResetLink!);
 
 			return RedirectToAction("LogIn", "Authentication");
 		}
