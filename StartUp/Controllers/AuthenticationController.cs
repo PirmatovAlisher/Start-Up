@@ -5,8 +5,6 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using NToastNotify;
 using ServiceLayer.Helpers.Identity.EmailHelper;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
@@ -155,6 +153,8 @@ namespace StartUp.Controllers
 				return View(request);
 			}
 
+			_toasty.AddSuccessToastMessage($"Your password reset link has been sent to your email address",
+				new ToastrOptions { Title = "Congratulations" });
 			await _authenticationService.CreateResetCredentialsAndSend(hasUser, HttpContext, Url, request);
 
 			return RedirectToAction("LogIn", "Authentication");
@@ -184,6 +184,8 @@ namespace StartUp.Controllers
 
 			if (userId == null || token == null)
 			{
+				_toasty.AddErrorToastMessage($"Your token is no more valid, please try again",
+					new ToastrOptions { Title = "I am Sorry!" });
 				return RedirectToAction("LogIn", "Authentication");
 			}
 
@@ -200,6 +202,8 @@ namespace StartUp.Controllers
 
 			if (hasUser == null)
 			{
+				_toasty.AddErrorToastMessage($"User does not exist",
+					new ToastrOptions { Title = "I am Sorry!" });
 				return RedirectToAction("LogIn", "Authentication");
 			}
 
@@ -207,6 +211,8 @@ namespace StartUp.Controllers
 
 			if (resetPasswordResult.Succeeded)
 			{
+				_toasty.AddSuccessToastMessage($"Your password has been changed, please try to log in",
+				new ToastrOptions { Title = "Congratulations" });
 				return RedirectToAction("LogIn", "Authentication");
 			}
 			else
