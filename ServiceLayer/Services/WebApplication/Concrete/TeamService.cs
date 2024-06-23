@@ -54,7 +54,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			if (imageResult.Error != null)
 			{
 				_toasty.AddErrorToastMessage(imageResult.Error,
-					new ToastrOptions { Title = NotificationMessages.FailedTitle });
+					new ToastrOptions { Title = NotificationMessagesWebApplication.FailedTitle });
 				return;
 			}
 
@@ -64,8 +64,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var team = _mapper.Map<Team>(request);
 			await _repository.AddEntityAsync(team);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddSuccessToastMessage(NotificationMessages.AddMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddSuccessToastMessage(NotificationMessagesWebApplication.AddMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 
 		public async Task DeleteTeamAsync(int id)
@@ -74,8 +74,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			_repository.DeleteEntity(team);
 			await _unitOfWork.CommitAsync();
 			_imageHelper.DeleteImage(team.FileName);
-			_toasty.AddWarningToastMessage(NotificationMessages.DeleteMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddWarningToastMessage(NotificationMessagesWebApplication.DeleteMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 
 		public async Task<TeamUpdateVM> GetTeamById(int id)
@@ -96,7 +96,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 				if (imageResult.Error != null)
 				{
-					_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = NotificationMessages.FailedTitle });
+					_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = NotificationMessagesWebApplication.FailedTitle });
 					return;
 				}
 
@@ -113,8 +113,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			{
 				_imageHelper.DeleteImage(oldTeam.FileName);
 			}
-			_toasty.AddInfoToastMessage(NotificationMessages.UpdateMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 	}
 }

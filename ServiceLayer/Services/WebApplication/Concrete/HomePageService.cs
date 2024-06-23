@@ -48,8 +48,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var homePage = _mapper.Map<HomePage>(request);
 			await _repository.AddEntityAsync(homePage);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddSuccessToastMessage(NotificationMessages.AddMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddSuccessToastMessage(NotificationMessagesWebApplication.AddMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 
 		public async Task DeleteHomePageAsync(int id)
@@ -57,8 +57,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var homePage = await _repository.GetEntityByIdAsync(id);
 			_repository.DeleteEntity(homePage);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddWarningToastMessage(NotificationMessages.DeleteMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddWarningToastMessage(NotificationMessagesWebApplication.DeleteMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 
 		public async Task<HomePageUpdateVM> GetHomePageById(int id)
@@ -76,8 +76,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			_repository.UpdateEntity(homePage);
 			await _unitOfWork.CommitAsync();
 
-			_toasty.AddInfoToastMessage(NotificationMessages.UpdateMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 	}
 }

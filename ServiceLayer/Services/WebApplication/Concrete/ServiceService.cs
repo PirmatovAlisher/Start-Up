@@ -48,8 +48,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var service = _mapper.Map<Service>(request);
 			await _repository.AddEntityAsync(service);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddSuccessToastMessage(NotificationMessages.AddMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddSuccessToastMessage(NotificationMessagesWebApplication.AddMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 
 		public async Task DeleteServiceAsync(int id)
@@ -57,8 +57,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var service = await _repository.GetEntityByIdAsync(id);
 			_repository.DeleteEntity(service);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddWarningToastMessage(NotificationMessages.DeleteMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddWarningToastMessage(NotificationMessagesWebApplication.DeleteMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 
 		public async Task<ServiceUpdateVM> GetServiceById(int id)
@@ -75,8 +75,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 			_repository.UpdateEntity(service);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddInfoToastMessage(NotificationMessages.UpdateMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
 	}
 }

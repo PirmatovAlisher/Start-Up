@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using ServiceLayer.Helpers.Identity.EmailHelper;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
+using ServiceLayer.Messages.Identity;
 using ServiceLayer.Services.Identity.Abstract;
 
 namespace StartUp.Controllers
@@ -78,7 +79,8 @@ namespace StartUp.Controllers
 				return View(request);
 			}
 
-			_toasty.AddSuccessToastMessage($"{user.UserName} has been created", new ToastrOptions { Title = "Congratulations" });
+			_toasty.AddSuccessToastMessage(NotificationMessagesIdentity.SignUp(user.UserName!),
+				new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
 			return RedirectToAction("Login", "Authentication");
 		}
 
@@ -112,7 +114,8 @@ namespace StartUp.Controllers
 
 			if (logInResult.Succeeded)
 			{
-				_toasty.AddSuccessToastMessage("You have logged in", new ToastrOptions { Title = "Congratulations" });
+				_toasty.AddSuccessToastMessage(NotificationMessagesIdentity.LogInSuccess,
+					new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
 				return Redirect(returnUrl!);
 			}
 
@@ -153,8 +156,8 @@ namespace StartUp.Controllers
 				return View(request);
 			}
 
-			_toasty.AddSuccessToastMessage($"Your password reset link has been sent to your email address",
-				new ToastrOptions { Title = "Congratulations" });
+			_toasty.AddSuccessToastMessage(NotificationMessagesIdentity.ResetPasswordSuccess,
+				new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
 			await _authenticationService.CreateResetCredentialsAndSend(hasUser, HttpContext, Url, request);
 
 			return RedirectToAction("LogIn", "Authentication");
@@ -184,8 +187,8 @@ namespace StartUp.Controllers
 
 			if (userId == null || token == null)
 			{
-				_toasty.AddErrorToastMessage($"Your token is no more valid, please try again",
-					new ToastrOptions { Title = "I am Sorry!" });
+				_toasty.AddErrorToastMessage(NotificationMessagesIdentity.TokenValidationError,
+					new ToastrOptions { Title = NotificationMessagesIdentity.FailedTitle });
 				return RedirectToAction("LogIn", "Authentication");
 			}
 
@@ -202,7 +205,7 @@ namespace StartUp.Controllers
 
 			if (hasUser == null)
 			{
-				_toasty.AddErrorToastMessage($"User does not exist",
+				_toasty.AddErrorToastMessage(NotificationMessagesIdentity.UserNotFound(hasUser.UserName!),
 					new ToastrOptions { Title = "I am Sorry!" });
 				return RedirectToAction("LogIn", "Authentication");
 			}
@@ -211,8 +214,8 @@ namespace StartUp.Controllers
 
 			if (resetPasswordResult.Succeeded)
 			{
-				_toasty.AddSuccessToastMessage($"Your password has been changed, please try to log in",
-				new ToastrOptions { Title = "Congratulations" });
+				_toasty.AddSuccessToastMessage(NotificationMessagesIdentity.PasswordChangeSuccess,
+				new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
 				return RedirectToAction("LogIn", "Authentication");
 			}
 			else

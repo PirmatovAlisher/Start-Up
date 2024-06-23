@@ -49,8 +49,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var category = _mapper.Map<Category>(request);
 			await _repository.AddEntityAsync(category);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddSuccessToastMessage(NotificationMessages.AddMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddSuccessToastMessage(NotificationMessagesWebApplication.AddMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 
 		}
 
@@ -59,8 +59,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var category = await _repository.GetEntityByIdAsync(id);
 			_repository.DeleteEntity(category);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddWarningToastMessage(NotificationMessages.DeleteMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddWarningToastMessage(NotificationMessagesWebApplication.DeleteMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 
 		}
 
@@ -78,8 +78,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 			_repository.UpdateEntity(category);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddInfoToastMessage(NotificationMessages.UpdateMessage(Section),
-				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
+			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 
 		}
 	}

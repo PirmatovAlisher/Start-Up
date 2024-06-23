@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Messages.WebApplication
 {
-	public static class NotificationMessages
+	public static class NotificationMessagesWebApplication
 	{
 		private const string BaseAddMessage = "Has been submitted!";
 		private const string BaseUpdateMessage = "Has been updated!";

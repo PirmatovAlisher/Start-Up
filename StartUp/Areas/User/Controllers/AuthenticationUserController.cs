@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
+using ServiceLayer.Messages.Identity;
 using ServiceLayer.Services.Identity.Concrete;
 
 namespace StartUp.Areas.User.Controllers
@@ -62,7 +63,8 @@ namespace StartUp.Areas.User.Controllers
 			}
 
 			ViewBag.UserName = user!.UserName;
-			_toasty.AddInfoToastMessage($"{user.UserName} has been updated", new ToastrOptions { Title = "Congratulations" });
+			_toasty.AddInfoToastMessage(NotificationMessagesIdentity.UserEdit(user.UserName!),
+				new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
 			return RedirectToAction("Index", "Dashboard", new { Area = "User" });
 		}
 	}
