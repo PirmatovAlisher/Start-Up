@@ -3,8 +3,10 @@ using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
 using EntityLayer.WebApplication.ViewModels.ContactVM;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using RepositoryLayer.Repositories.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
+using ServiceLayer.Messages.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace ServiceLayer.Services.WebApplication.Concrete
@@ -14,12 +16,15 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IMapper _mapper;
 		private readonly IGenericRepositories<Contact> _repository;
+		private readonly IToastNotification _toasty;
+		private const string Section = "Contact ";
 
-		public ContactService(IUnitOfWork unitOfWork, IMapper mapper)
+		public ContactService(IUnitOfWork unitOfWork, IMapper mapper, IToastNotification toasty)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 			_repository = _unitOfWork.GetGenericRepository<Contact>();
+			_toasty = toasty;
 		}
 
 
@@ -43,6 +48,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var contact = _mapper.Map<Contact>(request);
 			await _repository.AddEntityAsync(contact);
 			await _unitOfWork.CommitAsync();
+			_toasty.AddSuccessToastMessage(NotificationMessages.AddMessage(Section),
+				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 
 		public async Task DeleteContactAsync(int id)
@@ -50,6 +57,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var contact = await _repository.GetEntityByIdAsync(id);
 			_repository.DeleteEntity(contact);
 			await _unitOfWork.CommitAsync();
+			_toasty.AddWarningToastMessage(NotificationMessages.DeleteMessage(Section),
+				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 
 		public async Task<ContactUpdateVM> GetContactById(int id)
@@ -66,6 +75,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 			_repository.UpdateEntity(contact);
 			await _unitOfWork.CommitAsync();
+			_toasty.AddInfoToastMessage(NotificationMessages.UpdateMessage(Section),
+				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 	}
 }

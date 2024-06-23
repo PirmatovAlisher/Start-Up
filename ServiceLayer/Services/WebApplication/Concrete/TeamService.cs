@@ -4,9 +4,11 @@ using CoreLayer.Enumerators;
 using EntityLayer.WebApplication.Entities;
 using EntityLayer.WebApplication.ViewModels.TeamVM;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using RepositoryLayer.Repositories.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
 using ServiceLayer.Helpers.Generic.Image;
+using ServiceLayer.Messages.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace ServiceLayer.Services.WebApplication.Concrete
@@ -17,13 +19,16 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 		private readonly IMapper _mapper;
 		private readonly IGenericRepositories<Team> _repository;
 		private readonly IImageHelper _imageHelper;
+		private readonly IToastNotification _toasty;
+		private const string Section = "Team ";
 
-		public TeamService(IUnitOfWork unitOfWork, IMapper mapper, IImageHelper imageHelper)
+		public TeamService(IUnitOfWork unitOfWork, IMapper mapper, IImageHelper imageHelper, IToastNotification toasty)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
 			_repository = _unitOfWork.GetGenericRepository<Team>();
 			_imageHelper = imageHelper;
+			_toasty = toasty;
 		}
 
 
@@ -48,6 +53,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 			if (imageResult.Error != null)
 			{
+				_toasty.AddErrorToastMessage(imageResult.Error,
+					new ToastrOptions { Title = NotificationMessages.FailedTitle });
 				return;
 			}
 
@@ -57,6 +64,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var team = _mapper.Map<Team>(request);
 			await _repository.AddEntityAsync(team);
 			await _unitOfWork.CommitAsync();
+			_toasty.AddSuccessToastMessage(NotificationMessages.AddMessage(Section),
+				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 
 		public async Task DeleteTeamAsync(int id)
@@ -65,6 +74,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			_repository.DeleteEntity(team);
 			await _unitOfWork.CommitAsync();
 			_imageHelper.DeleteImage(team.FileName);
+			_toasty.AddWarningToastMessage(NotificationMessages.DeleteMessage(Section),
+				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 
 		public async Task<TeamUpdateVM> GetTeamById(int id)
@@ -84,7 +95,10 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 				var imageResult = await _imageHelper.ImageUpload(request.Photo, ImageType.team, null);
 
 				if (imageResult.Error != null)
+				{
+					_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = NotificationMessages.FailedTitle });
 					return;
+				}
 
 				request.FileName = imageResult.FileName!;
 				request.FileType = imageResult.FileType!;
@@ -99,6 +113,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			{
 				_imageHelper.DeleteImage(oldTeam.FileName);
 			}
+			_toasty.AddInfoToastMessage(NotificationMessages.UpdateMessage(Section),
+				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 	}
 }

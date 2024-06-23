@@ -3,12 +3,12 @@ using AutoMapper.QueryableExtensions;
 using CoreLayer.Enumerators;
 using EntityLayer.WebApplication.Entities;
 using EntityLayer.WebApplication.ViewModels.AboutVM;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using RepositoryLayer.Repositories.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
 using ServiceLayer.Helpers.Generic.Image;
+using ServiceLayer.Messages.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace ServiceLayer.Services.WebApplication.Concrete
@@ -20,6 +20,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 		private readonly IGenericRepositories<About> _repository;
 		private readonly IImageHelper _imageHelper;
 		private readonly IToastNotification _toasty;
+		private const string Section = "About section ";
 
 		public AboutService(IUnitOfWork unitOfWork, IMapper mapper, IImageHelper imageHelper, IToastNotification toasty)
 		{
@@ -52,7 +53,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 			if (imageResult.Error != null)
 			{
-				_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = "I am sorry!" });
+				_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = NotificationMessages.FailedTitle });
 				return;
 			}
 
@@ -63,7 +64,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var about = _mapper.Map<About>(request);
 			await _repository.AddEntityAsync(about);
 			await _unitOfWork.CommitAsync();
-			_toasty.AddSuccessToastMessage("Your about section has been submitted", new ToastrOptions { Title = "Congratulations" });
+			_toasty.AddSuccessToastMessage(NotificationMessages.AddMessage(Section), new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 
 		public async Task DeleteAboutAsync(int id)
@@ -72,7 +73,8 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			_repository.DeleteEntity(about);
 			await _unitOfWork.CommitAsync();
 			_imageHelper.DeleteImage(about.FileName);
-			_toasty.AddWarningToastMessage("Your about section has been deleted", new ToastrOptions { Title = "Congratulations" });
+			_toasty.AddWarningToastMessage(NotificationMessages.DeleteMessage(Section),
+				new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 		}
 
 		public async Task<AboutUpdateVM> GetAboutById(int id)
@@ -94,7 +96,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
 				if (imageResult.Error != null)
 				{
-					_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = "I am sorry!" });
+					_toasty.AddErrorToastMessage(imageResult.Error, new ToastrOptions { Title = NotificationMessages.FailedTitle });
 					return;
 				}
 
@@ -112,7 +114,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			{
 				_imageHelper.DeleteImage(oldAbout.FileName);
 			}
-			_toasty.AddInfoToastMessage("Your about section has been updated", new ToastrOptions { Title = "Congratulations" });
+			_toasty.AddInfoToastMessage(NotificationMessages.UpdateMessage(Section), new ToastrOptions { Title = NotificationMessages.SucceededTitle });
 
 		}
 	}
