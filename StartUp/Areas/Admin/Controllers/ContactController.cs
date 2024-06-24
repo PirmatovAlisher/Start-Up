@@ -1,7 +1,9 @@
-﻿using EntityLayer.WebApplication.ViewModels.ContactVM;
+﻿using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.ContactVM;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Filter.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
@@ -28,7 +30,7 @@ namespace StartUp.Areas.Admin.Controllers
 			return View(contactList);
 		}
 
-
+		[ServiceFilter(typeof(GenericAddPreventationFilter<Contact>))]
 		[HttpGet]
 		public IActionResult AddContact()
 		{
