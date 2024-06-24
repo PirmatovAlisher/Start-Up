@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceLayer.Extensions.Identity;
+using ServiceLayer.Extensions.WebApplication;
 using ServiceLayer.FluentValidation.WebApplication.HomePageValidation;
 using ServiceLayer.Helpers.Generic.Image;
 using System;
@@ -19,6 +20,7 @@ namespace ServiceLayer.Extensions
 		public static IServiceCollection LoadServiceLayerExtensions(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.LoadIdentityExtensions(configuration);
+			services.LoadWebApplicationExtensions();
 
 			services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

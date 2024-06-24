@@ -2,6 +2,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Filter.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
@@ -29,7 +30,7 @@ namespace StartUp.Areas.Admin.Controllers
 			return View(aboutList);
 		}
 
-
+		[ServiceFilter(typeof(AddAboutPreventationFilter))]
 		[HttpGet]
 		public IActionResult AddAbout()
 		{

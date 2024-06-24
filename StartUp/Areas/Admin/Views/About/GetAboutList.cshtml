@@ -51,7 +51,10 @@
 	</div>
 </div>
 
-<a asp-area="Admin" asp-controller="About" asp-action="AddAbout" class="btn btn-sm btn-success mb-3">Add About Us</a>
+@if (!Model.Any())
+{
+	<a asp-area="Admin" asp-controller="About" asp-action="AddAbout" class="btn btn-sm btn-success mb-3">Add About Us</a>
+}
 
 
 @foreach (var item in Model)
