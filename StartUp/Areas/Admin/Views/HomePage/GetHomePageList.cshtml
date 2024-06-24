@@ -15,9 +15,10 @@
 	</ol>
 </nav>
 <!-- End BreadCrum -->
-
-
-<a asp-area="Admin" asp-controller="HomePage" asp-action="AddHomePage" class="btn btn-sm btn-success mb-3">Add Home Page</a>
+@if (!Model.Any())
+{
+	<a asp-area="Admin" asp-controller="HomePage" asp-action="AddHomePage" class="btn btn-sm btn-success mb-3">Add Home Page</a>
+}
 
 
 <div class="card">

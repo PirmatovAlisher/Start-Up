@@ -54,6 +54,7 @@ namespace StartUp.Areas.Admin.Controllers
 
 		}
 
+		[ServiceFilter(typeof(GenericNotFoundFilter<About>))]
 		[HttpGet]
 		public async Task<IActionResult> UpdateAbout(int id)
 		{

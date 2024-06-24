@@ -1,7 +1,9 @@
-﻿using EntityLayer.WebApplication.ViewModels.PortfolioVM;
+﻿using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.PortfolioVM;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Filter.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
@@ -55,6 +57,7 @@ namespace StartUp.Areas.Admin.Controllers
 
 		}
 
+		[ServiceFilter(typeof(GenericNotFoundFilter<Portfolio>))]
 		[HttpGet]
 		public async Task<IActionResult> UpdatePortfolio(int id)
 		{

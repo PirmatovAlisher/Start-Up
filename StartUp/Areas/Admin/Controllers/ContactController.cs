@@ -53,6 +53,7 @@ namespace StartUp.Areas.Admin.Controllers
 			return View(request);
 		}
 
+		[ServiceFilter(typeof(GenericNotFoundFilter<Contact>))]
 		[HttpGet]
 		public async Task<IActionResult> UpdateContact(int id)
 		{

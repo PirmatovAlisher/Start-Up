@@ -1,7 +1,9 @@
-﻿using EntityLayer.WebApplication.ViewModels.TeamVM;
+﻿using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.TeamVM;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Filter.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
@@ -54,6 +56,7 @@ namespace StartUp.Areas.Admin.Controllers
 
 		}
 
+		[ServiceFilter(typeof(GenericNotFoundFilter<Team>))]
 		[HttpGet]
 		public async Task<IActionResult> UpdateTeam(int id)
 		{

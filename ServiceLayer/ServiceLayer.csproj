@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Customization\WebApplication\" />
     <Folder Include="Exceptions\Identity\" />
-    <Folder Include="Exceptions\WebApplication\" />
     <Folder Include="Filter\Identity\" />
     <Folder Include="Helpers\WebApplication\" />
     <Folder Include="MiddleWares\Identity\" />

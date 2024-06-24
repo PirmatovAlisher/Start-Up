@@ -1,8 +1,10 @@
-﻿using EntityLayer.WebApplication.ViewModels.CategortVM;
+﻿using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.CategortVM;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.Filter.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
@@ -30,7 +32,7 @@ namespace StartUp.Areas.Admin.Controllers
 			return View(categoryList);
 		}
 
-
+		[ServiceFilter(typeof(GenericAddPreventationFilter<Category>))]
 		[HttpGet]
 		public IActionResult AddCategory()
 		{
@@ -53,6 +55,7 @@ namespace StartUp.Areas.Admin.Controllers
 			return View(request);
 		}
 
+		[ServiceFilter(typeof(GenericNotFoundFilter<Category>))]
 		[HttpGet]
 		public async Task<IActionResult> UpdateCategory(int id)
 		{
