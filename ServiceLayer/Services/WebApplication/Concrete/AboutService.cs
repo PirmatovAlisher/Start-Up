@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using RepositoryLayer.Repositories.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
+using ServiceLayer.Exceptions.WebApplication;
 using ServiceLayer.Helpers.Generic.Image;
 using ServiceLayer.Messages.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
+using System.Data;
 
 namespace ServiceLayer.Services.WebApplication.Concrete
 {
@@ -107,14 +109,20 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var about = _mapper.Map<About>(request);
 
 			_repository.UpdateEntity(about);
-			await _unitOfWork.CommitAsync();
+			var result = await _unitOfWork.CommitAsync();
+			if (!result)
+			{
+				_imageHelper.DeleteImage(request.FileName);
+				throw new ClientSideExceptions(ExceptionMessages.ConcurrencyException);
+			}
 
 
 			if (request.Photo != null)
 			{
 				_imageHelper.DeleteImage(oldAbout.FileName);
 			}
-			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section), new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
+			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
+				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 
 		}
 	}

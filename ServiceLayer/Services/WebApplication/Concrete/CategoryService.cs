@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using RepositoryLayer.Repositories.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
+using ServiceLayer.Exceptions.WebApplication;
 using ServiceLayer.Messages.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
@@ -77,7 +78,11 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			var category = _mapper.Map<Category>(request);
 
 			_repository.UpdateEntity(category);
-			await _unitOfWork.CommitAsync();
+			var result = await _unitOfWork.CommitAsync();
+			if (!result)
+			{
+				throw new ClientSideExceptions(ExceptionMessages.ConcurrencyException);
+			}
 			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
 				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 

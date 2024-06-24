@@ -7,7 +7,7 @@ namespace RepositoryLayer.UnitOfWorks.Abstract
     {
         void Commit();
 
-        Task CommitAsync();
+        Task<bool> CommitAsync();
 
         IGenericRepositories<T> GetGenericRepository<T>() where T : class, IBaseEntity, new();
 
