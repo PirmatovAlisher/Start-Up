@@ -25,8 +25,6 @@
 		<form asp-area="Admin" asp-controller="Contact" asp-action="UpdateContact" method="post" class="row g-3">
 			<input type="hidden" asp-for="Id" />
 			<input type="hidden" asp-for="RowVersion" />
-			<input type="hidden" asp-for="UpdatedDate" value="@DateTime.Now" />
-			@* <input type="hidden" asp-for="UpdatedDate" value="@DateTime.Now"/> *@
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="col-md-12">
 				<div class="form-floating">

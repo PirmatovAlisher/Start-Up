@@ -32,7 +32,6 @@ namespace StartUp.Areas.Admin.Controllers
 			return View(categoryList);
 		}
 
-		[ServiceFilter(typeof(GenericAddPreventationFilter<Category>))]
 		[HttpGet]
 		public IActionResult AddCategory()
 		{
