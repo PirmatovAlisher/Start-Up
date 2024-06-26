@@ -47,6 +47,22 @@ namespace RepositoryLayer.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "de820986-a707-4cc5-8306-776812617837",
+                            ConcurrencyStamp = "21ad7753-ca1d-476b-8ab4-60c79c797931",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        },
+                        new
+                        {
+                            Id = "d140eb54-ed6e-4ff2-9199-71fcbe722ef7",
+                            ConcurrencyStamp = "d919a5b9-4c40-4d87-96ee-2676cbac9c9f",
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Identity.Entities.AppUser", b =>
@@ -118,6 +134,40 @@ namespace RepositoryLayer.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "256ac0cc-c4b0-458d-957d-24cbfd49225b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cd16ed86-35cd-40b6-97f6-f086f3ffe692",
+                            Email = "pirmatovalisher000@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PIRMATOVALISHER000@GMAIL.COM",
+                            NormalizedUserName = "TESTADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAENIED/Len0vcr2O3tgDhHQgeOsEutQ+zQKAuyDvSuE+DBg0lonDA0Oxs56bq5AFCNA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2d888246-854c-40f7-9516-1ec768967ca5",
+                            TwoFactorEnabled = false,
+                            UserName = "TestAdmin"
+                        },
+                        new
+                        {
+                            Id = "dce8cfd5-d290-4353-b50d-58707ed8da4d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0dd36eb8-5931-4594-a4e6-8bd5b3b794cc",
+                            Email = "pirmatovalisher0000@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PIRMATOVALISHER0000@GMAIL.COM",
+                            NormalizedUserName = "TESTMEMBER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEITx4eu+6deC/g9hIOY8qdwGuPCLUnaR3d5j8kMD5ZRReTeicax7YoLxdH6/Tm+e3Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2f960dc5-587d-44d9-976c-93b71ffb9ca2",
+                            TwoFactorEnabled = false,
+                            UserName = "TestMember"
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.WebApplication.Entities.About", b =>
@@ -191,7 +241,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Clients = 5,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 637, DateTimeKind.Local).AddTicks(5855),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(557),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In ante metus dictum at tempor commodo ullamcorper a lacus. Suspendisse in est ante in nibh mauris. Lorem ipsum dolor sit amet consectetur adipiscing elit. Erat imperdiet sed euismod nisi. Sed blandit libero volutpat sed cras ornare arcu dui vivamus. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa.",
                             FileName = "Test",
                             FileType = "Test",
@@ -238,13 +288,13 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 637, DateTimeKind.Local).AddTicks(8220),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(3763),
                             Name = "Projects"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 637, DateTimeKind.Local).AddTicks(8224),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(3768),
                             Name = "SiteWorks"
                         });
                 });
@@ -299,7 +349,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Call = "+998-94-361-99-25",
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 637, DateTimeKind.Local).AddTicks(9705),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(5581),
                             Email = "pirmatovalisher000@gmail.com",
                             Location = "Tarraqiyot 35, 37-Xamza MFY, Chirchiq shaxri, Toshkent v., Uzb",
                             Map = "Location Link here"
@@ -350,7 +400,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(1117),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(7436),
                             Description = "Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nec nam aliquam sem et tortor. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Diam in arcu cursus euismod quis viverra nibh cras. Velit sed ullamcorper morbi tincidunt ornare. ",
                             Header = "Rutrum tellus pellentesque eu tincidunt.",
                             VideoLink = "Video Link here"
@@ -406,7 +456,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(2820),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9451),
                             FileName = "Fames ac turpis",
                             FileType = ".blend",
                             Title = "Sed velit dignissim sodales ut eu sem integer vitae justo."
@@ -415,7 +465,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(2824),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9456),
                             FileName = " Sed id interdum",
                             FileType = ".DXF",
                             Title = "Arcu bibendum at varius vel."
@@ -424,7 +474,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(2825),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9457),
                             FileName = "Mattis ac turpis",
                             FileType = ".blend",
                             Title = "Mattis pellentesque id nibh"
@@ -433,7 +483,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(2826),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9458),
                             FileName = " Tellus id interdum",
                             FileType = ".DXF",
                             Title = "Nec ullamcorper sit amet risus nullam eget felis eget."
@@ -485,7 +535,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(4252),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(1129),
                             Description = "Augue interdum velit euismod in. Egestas dui id ornare arcu. Duis at tellus at urna condimentum mattis pellentesque id nibh. ",
                             Icon = "bi bi-service1",
                             Name = "Tristique"
@@ -493,7 +543,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(4257),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(1134),
                             Description = "Donec adipiscing tristique risus nec feugiat in fermentum posuere.",
                             Icon = "bi bi-service2",
                             Name = "Faucibus"
@@ -501,7 +551,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(4258),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(1135),
                             Description = "Neque egestas congue quisque egestas diam in.",
                             Icon = "bi bi-service3",
                             Name = "Porttitor"
@@ -550,7 +600,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(5489),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(2628),
                             Facebook = "Facebook",
                             Instagram = "Instagram",
                             Twitter = "Twitter"
@@ -617,7 +667,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(6895),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(4274),
                             Facebook = "Test",
                             FileName = "Lectus quam",
                             FileType = ".sat",
@@ -682,7 +732,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Comment = "Vitae suscipit tellus mauris a diam maecenas sed.",
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(8302),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(5923),
                             FileName = "Hendrerit gravida",
                             FileType = ".jpeg",
                             FullName = "Massa Lobortis",
@@ -692,7 +742,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 2,
                             Comment = "Nulla posuere sollicitudin",
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(8306),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(5928),
                             FileName = "Proin sed libero enim",
                             FileType = ".cs",
                             FullName = "Vitae Eget",
@@ -702,7 +752,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 3,
                             Comment = "Rutrum tellus pellentesque eu tincidunt.",
-                            CreatedDate = new DateTime(2024, 6, 24, 22, 26, 47, 638, DateTimeKind.Local).AddTicks(8308),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(5930),
                             FileName = "Donec adipiscing",
                             FileType = ".cshtml",
                             FullName = "Rutrum Cursus",
@@ -790,11 +840,20 @@ namespace RepositoryLayer.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(34)
+                        .HasColumnType("nvarchar(34)");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -814,6 +873,25 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("EntityLayer.Identity.Entities.AppUserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
+
+                    b.HasDiscriminator().HasValue("AppUserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "256ac0cc-c4b0-458d-957d-24cbfd49225b",
+                            RoleId = "de820986-a707-4cc5-8306-776812617837"
+                        },
+                        new
+                        {
+                            UserId = "dce8cfd5-d290-4353-b50d-58707ed8da4d",
+                            RoleId = "d140eb54-ed6e-4ff2-9199-71fcbe722ef7"
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.WebApplication.Entities.About", b =>

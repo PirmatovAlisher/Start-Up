@@ -12,18 +12,166 @@ using RepositoryLayer.Context;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240527111633_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240626073057_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("EntityLayer.Identity.Entities.AppRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "de820986-a707-4cc5-8306-776812617837",
+                            ConcurrencyStamp = "21ad7753-ca1d-476b-8ab4-60c79c797931",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        },
+                        new
+                        {
+                            Id = "d140eb54-ed6e-4ff2-9199-71fcbe722ef7",
+                            ConcurrencyStamp = "d919a5b9-4c40-4d87-96ee-2676cbac9c9f",
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
+                        });
+                });
+
+            modelBuilder.Entity("EntityLayer.Identity.Entities.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "256ac0cc-c4b0-458d-957d-24cbfd49225b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cd16ed86-35cd-40b6-97f6-f086f3ffe692",
+                            Email = "pirmatovalisher000@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PIRMATOVALISHER000@GMAIL.COM",
+                            NormalizedUserName = "TESTADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAENIED/Len0vcr2O3tgDhHQgeOsEutQ+zQKAuyDvSuE+DBg0lonDA0Oxs56bq5AFCNA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2d888246-854c-40f7-9516-1ec768967ca5",
+                            TwoFactorEnabled = false,
+                            UserName = "TestAdmin"
+                        },
+                        new
+                        {
+                            Id = "dce8cfd5-d290-4353-b50d-58707ed8da4d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0dd36eb8-5931-4594-a4e6-8bd5b3b794cc",
+                            Email = "pirmatovalisher0000@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PIRMATOVALISHER0000@GMAIL.COM",
+                            NormalizedUserName = "TESTMEMBER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEITx4eu+6deC/g9hIOY8qdwGuPCLUnaR3d5j8kMD5ZRReTeicax7YoLxdH6/Tm+e3Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2f960dc5-587d-44d9-976c-93b71ffb9ca2",
+                            TwoFactorEnabled = false,
+                            UserName = "TestMember"
+                        });
+                });
 
             modelBuilder.Entity("EntityLayer.WebApplication.Entities.About", b =>
                 {
@@ -96,7 +244,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Clients = 5,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 936, DateTimeKind.Local).AddTicks(8308),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(557),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In ante metus dictum at tempor commodo ullamcorper a lacus. Suspendisse in est ante in nibh mauris. Lorem ipsum dolor sit amet consectetur adipiscing elit. Erat imperdiet sed euismod nisi. Sed blandit libero volutpat sed cras ornare arcu dui vivamus. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa.",
                             FileName = "Test",
                             FileType = "Test",
@@ -143,13 +291,13 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 936, DateTimeKind.Local).AddTicks(9905),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(3763),
                             Name = "Projects"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 936, DateTimeKind.Local).AddTicks(9908),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(3768),
                             Name = "SiteWorks"
                         });
                 });
@@ -204,7 +352,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Call = "+998-94-361-99-25",
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(1462),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(5581),
                             Email = "pirmatovalisher000@gmail.com",
                             Location = "Tarraqiyot 35, 37-Xamza MFY, Chirchiq shaxri, Toshkent v., Uzb",
                             Map = "Location Link here"
@@ -255,7 +403,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(2970),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(7436),
                             Description = "Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nec nam aliquam sem et tortor. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Diam in arcu cursus euismod quis viverra nibh cras. Velit sed ullamcorper morbi tincidunt ornare. ",
                             Header = "Rutrum tellus pellentesque eu tincidunt.",
                             VideoLink = "Video Link here"
@@ -311,7 +459,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(4446),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9451),
                             FileName = "Fames ac turpis",
                             FileType = ".blend",
                             Title = "Sed velit dignissim sodales ut eu sem integer vitae justo."
@@ -320,7 +468,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(4451),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9456),
                             FileName = " Sed id interdum",
                             FileType = ".DXF",
                             Title = "Arcu bibendum at varius vel."
@@ -329,7 +477,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(4452),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9457),
                             FileName = "Mattis ac turpis",
                             FileType = ".blend",
                             Title = "Mattis pellentesque id nibh"
@@ -338,7 +486,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(4453),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 58, DateTimeKind.Local).AddTicks(9458),
                             FileName = " Tellus id interdum",
                             FileType = ".DXF",
                             Title = "Nec ullamcorper sit amet risus nullam eget felis eget."
@@ -390,7 +538,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(5885),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(1129),
                             Description = "Augue interdum velit euismod in. Egestas dui id ornare arcu. Duis at tellus at urna condimentum mattis pellentesque id nibh. ",
                             Icon = "bi bi-service1",
                             Name = "Tristique"
@@ -398,7 +546,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(5888),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(1134),
                             Description = "Donec adipiscing tristique risus nec feugiat in fermentum posuere.",
                             Icon = "bi bi-service2",
                             Name = "Faucibus"
@@ -406,7 +554,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(5889),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(1135),
                             Description = "Neque egestas congue quisque egestas diam in.",
                             Icon = "bi bi-service3",
                             Name = "Porttitor"
@@ -455,7 +603,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(7177),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(2628),
                             Facebook = "Facebook",
                             Instagram = "Instagram",
                             Twitter = "Twitter"
@@ -522,7 +670,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 937, DateTimeKind.Local).AddTicks(8607),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(4274),
                             Facebook = "Test",
                             FileName = "Lectus quam",
                             FileType = ".sat",
@@ -587,7 +735,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Comment = "Vitae suscipit tellus mauris a diam maecenas sed.",
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 938, DateTimeKind.Local).AddTicks(98),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(5923),
                             FileName = "Hendrerit gravida",
                             FileType = ".jpeg",
                             FullName = "Massa Lobortis",
@@ -597,7 +745,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 2,
                             Comment = "Nulla posuere sollicitudin",
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 938, DateTimeKind.Local).AddTicks(103),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(5928),
                             FileName = "Proin sed libero enim",
                             FileType = ".cs",
                             FullName = "Vitae Eget",
@@ -607,11 +755,145 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 3,
                             Comment = "Rutrum tellus pellentesque eu tincidunt.",
-                            CreatedDate = new DateTime(2024, 5, 27, 16, 16, 31, 938, DateTimeKind.Local).AddTicks(104),
+                            CreatedDate = new DateTime(2024, 6, 26, 12, 30, 54, 59, DateTimeKind.Local).AddTicks(5930),
                             FileName = "Donec adipiscing",
                             FileType = ".cshtml",
                             FullName = "Rutrum Cursus",
                             Title = " Sodales ut eu sem"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(34)
+                        .HasColumnType("nvarchar(34)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("EntityLayer.Identity.Entities.AppUserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
+
+                    b.HasDiscriminator().HasValue("AppUserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "256ac0cc-c4b0-458d-957d-24cbfd49225b",
+                            RoleId = "de820986-a707-4cc5-8306-776812617837"
+                        },
+                        new
+                        {
+                            UserId = "dce8cfd5-d290-4353-b50d-58707ed8da4d",
+                            RoleId = "d140eb54-ed6e-4ff2-9199-71fcbe722ef7"
                         });
                 });
 
@@ -631,10 +913,61 @@ namespace RepositoryLayer.Migrations
                     b.HasOne("EntityLayer.WebApplication.Entities.Category", "Category")
                         .WithMany("Portfolios")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("EntityLayer.Identity.Entities.AppRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("EntityLayer.Identity.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("EntityLayer.Identity.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("EntityLayer.Identity.Entities.AppRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Identity.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("EntityLayer.Identity.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EntityLayer.WebApplication.Entities.Category", b =>
