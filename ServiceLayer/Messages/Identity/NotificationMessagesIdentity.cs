@@ -10,14 +10,17 @@ namespace ServiceLayer.Messages.Identity
 	{
 		private const string SignUpSuccess = " has been created";
 		public const string LogInSuccess = "You have logged in";
-		public const string ResetPasswordSuccess= "Your password reset link has been sent to your email address";
-		public const string PasswordChangeSuccess= "Your password has been changed, please try to log in";
-		public const string TokenValidationError= "Your token is no more valid, please try again";
-		private const string UserEditSuccess= " has been updated";
-		private const string UserError= " does not exist";
+		public const string ResetPasswordSuccess = "Your password reset link has been sent to your email address";
+		public const string PasswordChangeSuccess = "Your password has been changed, please try to log in";
+		public const string TokenValidationError = "Your token is no more valid, please try again";
+		private const string UserEditSuccess = " has been updated";
+		private const string UserError = " does not exist";
 
 		public const string SucceededTitle = "Congratulations!";
 		public const string FailedTitle = "I am sorry!";
+
+		public const string ExtendClaimSuccess = "User	has 5 more days.";
+		public const string ExtendClaimFailed = "Failed to extend user's access.";
 
 		public static string SignUp(string userName) => userName + SignUpSuccess;
 		public static string UserEdit(string userName) => userName + UserEditSuccess;

@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
+using ServiceLayer.Messages.Identity;
+using System.Security.Claims;
 
 namespace StartUp.Areas.Admin.Controllers
 {
@@ -14,11 +17,13 @@ namespace StartUp.Areas.Admin.Controllers
 	{
 		private readonly UserManager<AppUser> _userManager;
 		private readonly IMapper _mapper;
+		private readonly IToastNotification _toasty;
 
-		public AdminController(UserManager<AppUser> userManager, IMapper mapper)
+		public AdminController(UserManager<AppUser> userManager, IMapper mapper, IToastNotification toasty)
 		{
 			_userManager = userManager;
 			_mapper = mapper;
+			_toasty = toasty;
 		}
 
 		public IActionResult Index()
@@ -42,6 +47,28 @@ namespace StartUp.Areas.Admin.Controllers
 			}
 
 			return View(userListVM);
+		}
+
+		public async Task<IActionResult> ExtendClaim(string userName)
+		{
+
+			var user = await _userManager.FindByNameAsync(userName);
+			var claims = await _userManager.GetClaimsAsync(user!);
+			var existingClaim = claims.FirstOrDefault(x => x.Type.Contains("Observer"));
+
+			var newExtendedClaim = new Claim("AdminObserverExpireDate", DateTime.Now.AddDays(5).ToString());
+
+			var renewClaim = await _userManager.ReplaceClaimAsync(user!, existingClaim!, newExtendedClaim);
+			if (!renewClaim.Succeeded)
+			{
+				_toasty.AddErrorToastMessage(NotificationMessagesIdentity.ExtendClaimFailed,
+				new ToastrOptions { Title = NotificationMessagesIdentity.FailedTitle });
+				return RedirectToAction("GetUserList", "Admin", new { Areas = "Admin" });
+			}
+
+			_toasty.AddSuccessToastMessage(NotificationMessagesIdentity.ExtendClaimSuccess,
+				new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
+			return RedirectToAction("GetUserList", "Admin", new { Areas = "Admin" });
 		}
 	}
 }
