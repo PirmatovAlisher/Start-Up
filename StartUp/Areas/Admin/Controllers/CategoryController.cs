@@ -9,7 +9,7 @@ using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-	[Authorize(Roles = "SuperAdmin")]
+	[Authorize(Policy = "AdminObserver")]
 	[Area("Admin")]
 	public class CategoryController : Controller
 	{
@@ -80,7 +80,7 @@ namespace StartUp.Areas.Admin.Controllers
 
 		}
 
-
+		[Authorize(Roles = "SuperAdmin")]
 		public async Task<IActionResult> DeleteCategory(int id)
 		{
 			await _categoryService.DeleteCategoryAsync(id);

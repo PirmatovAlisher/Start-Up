@@ -9,7 +9,7 @@ using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-	[Authorize(Roles = "SuperAdmin")]
+	[Authorize(Policy = "AdminObserver")]
 	[Area("Admin")]
 	public class ServiceController : Controller
 	{
@@ -81,7 +81,7 @@ namespace StartUp.Areas.Admin.Controllers
 
 		}
 
-
+		[Authorize(Roles = "SuperAdmin")]
 		public async Task<IActionResult> DeleteService(int id)
 		{
 			await _serviceService.DeleteServiceAsync(id);

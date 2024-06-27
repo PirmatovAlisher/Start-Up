@@ -9,7 +9,7 @@ using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-	[Authorize(Roles = "SuperAdmin")]
+	[Authorize(Policy = "AdminObserver")]
 	[Area("Admin")]
 	public class TestimonialController : Controller
 	{
@@ -81,7 +81,7 @@ namespace StartUp.Areas.Admin.Controllers
 
 		}
 
-
+		[Authorize(Roles = "SuperAdmin")]
 		public async Task<IActionResult> DeleteTestimonial(int id)
 		{
 			await _testimonialService.DeleteTestimonialAsync(id);

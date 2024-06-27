@@ -9,7 +9,7 @@ using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-	[Authorize(Roles = "SuperAdmin")]
+	[Authorize(Policy = "AdminObserver")]
 	[Area("Admin")]
 	public class TeamController : Controller
 	{
@@ -83,7 +83,7 @@ namespace StartUp.Areas.Admin.Controllers
 
 		}
 
-
+		[Authorize(Roles = "SuperAdmin")]
 		public async Task<IActionResult> DeleteTeam(int id)
 		{
 			await _teamService.DeleteTeamAsync(id);

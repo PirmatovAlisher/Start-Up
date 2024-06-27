@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StartUp.Areas.Admin.Controllers
 {
-	[Authorize(Roles = "SuperAdmin")]
+	[Authorize(Policy = "AdminObserver")]
 	[Area("Admin")]
 	public class DashboardController : Controller
 	{
