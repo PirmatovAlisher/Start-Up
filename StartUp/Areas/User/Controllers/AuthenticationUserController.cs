@@ -12,11 +12,12 @@ using ServiceLayer.Services.Identity.Concrete;
 
 namespace StartUp.Areas.User.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "Member, SuperAdmin")]
 	[Area("User")]
 	public class AuthenticationUserController : Controller
 	{
 		private readonly UserManager<AppUser> _userManager;
+		private readonly SignInManager<AppUser> _signInManager;
 		private readonly IValidator<UserEditVM> _userEditValidator;
 		private readonly IAuthenticationUserService _authenticationUserService;
 		private readonly IToastNotification _toasty;
@@ -24,12 +25,14 @@ namespace StartUp.Areas.User.Controllers
 		public AuthenticationUserController(UserManager<AppUser> userManager,
 											IValidator<UserEditVM> userEditValidator,
 											IAuthenticationUserService authenticationUserService,
-											IToastNotification toasty)
+											IToastNotification toasty,
+											SignInManager<AppUser> signInManager)
 		{
 			_userManager = userManager;
 			_userEditValidator = userEditValidator;
 			_authenticationUserService = authenticationUserService;
 			_toasty = toasty;
+			_signInManager = signInManager;
 		}
 
 
@@ -66,6 +69,13 @@ namespace StartUp.Areas.User.Controllers
 			_toasty.AddInfoToastMessage(NotificationMessagesIdentity.UserEdit(user.UserName!),
 				new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
 			return RedirectToAction("Index", "Dashboard", new { Area = "User" });
+		}
+
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync();
+
+			return Redirect("/Home/Index");
 		}
 	}
 }
