@@ -14,6 +14,7 @@ namespace ServiceLayer.AutoMapper.Identity
 		public UserEditMapper()
 		{
 			CreateMap<UserEditVM, AppUser>().ReverseMap();
+			CreateMap<AppUser, UserVM>().ReverseMap();
 		}
 	}
 }
