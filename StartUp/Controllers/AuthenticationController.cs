@@ -10,6 +10,7 @@ using ServiceLayer.Helpers.Identity.EmailHelper;
 using ServiceLayer.Helpers.Identity.ModelStateHelper;
 using ServiceLayer.Messages.Identity;
 using ServiceLayer.Services.Identity.Abstract;
+using System.Security.Claims;
 
 namespace StartUp.Controllers
 {
@@ -77,6 +78,26 @@ namespace StartUp.Controllers
 				ViewBag.Result = "Not Succeed";
 				ModelState.AddModelErrorList(userCreateResult.Errors);
 				return View(request);
+			}
+
+			var assignRoleResult = await _userManager.AddToRoleAsync(user, "Member");
+			if (!assignRoleResult.Succeeded)
+			{
+				await _userManager.DeleteAsync(user);
+				ViewBag.Result = "Not Succeed";
+				ModelState.AddModelErrorList(assignRoleResult.Errors);
+				return View();
+			}
+
+			var defaultClaim = new Claim("AdminObserverExpireDate", DateTime.Now.AddDays(-6).ToString());
+			var addClaimResult = await _userManager.AddClaimAsync(user, defaultClaim);
+			if (!addClaimResult.Succeeded)
+			{
+				await _userManager.RemoveFromRoleAsync(user, "Member");
+				await _userManager.DeleteAsync(user);
+				ViewBag.Result = "Not Succeed";
+				ModelState.AddModelErrorList(addClaimResult.Errors);
+				return View();
 			}
 
 			_toasty.AddSuccessToastMessage(NotificationMessagesIdentity.SignUp(user.UserName!),
