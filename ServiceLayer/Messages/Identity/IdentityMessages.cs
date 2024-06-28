@@ -1,4 +1,6 @@
-﻿namespace ServiceLayer.Messages.Identity
+﻿using System.Security.Policy;
+
+namespace ServiceLayer.Messages.Identity
 {
 	public static class IdentityMessages
 	{
@@ -11,5 +13,8 @@
 		{
 			return "Confirm Password must match with Password";
 		}
+
+		public const string SecurityStampError = "Your critical information has been changed, please try to log in again.";
+
 	}
 }

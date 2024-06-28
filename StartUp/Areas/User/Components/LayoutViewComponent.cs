@@ -17,15 +17,15 @@ namespace StartUp.Areas.User.Components
 			_userManager = userManager;
 		}
 
-		public async Task<IViewComponentResult> InvokeAsync(string UserName)
+		public async Task<IViewComponentResult> InvokeAsync(string id)
 		{
 
-			if (UserName == null)
+			if (id == null)
 			{
-				UserName = User.Identity!.Name!;
+				id = UserClaimsPrincipal.Claims.FirstOrDefault(x => x.Type.Contains("identifier"))!.Value;
 			}
 
-			var user = await _userManager.FindByNameAsync(UserName);
+			var user = await _userManager.FindByIdAsync(id);
 
 			if (user!.FileName == null)
 			{

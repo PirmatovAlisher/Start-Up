@@ -28,5 +28,10 @@ namespace StartUp.Controllers
 
 			return View(new ErrorVM("Server error, please contact with server", 500)); ;
 		}
+
+		public IActionResult PageNotFound()
+		{
+			return View();
+		}
 	}
 }

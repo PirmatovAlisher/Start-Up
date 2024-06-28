@@ -108,12 +108,18 @@ namespace StartUp.Controllers
 		[HttpGet]
 		public IActionResult LogIn(string? errorMessage)
 		{
-			if (errorMessage != null)
+			if (errorMessage != null && errorMessage == IdentityMessages.SecurityStampError)
 			{
 				ViewBag.Result = "Failed";
 				ModelState.AddModelErrorList(new List<string> { errorMessage });
 				return View();
 			}
+
+			if (errorMessage != null)
+			{
+				return Redirect("/Error/PageNotFound");
+			}
+
 			return View();
 		}
 

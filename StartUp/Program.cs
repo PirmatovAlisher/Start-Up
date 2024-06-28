@@ -30,7 +30,9 @@ namespace StartUp
                 app.UseHsts();
             }
 
-            
+            //app.UseStatusCodePagesWithRedirects("/Error/PageNotFound");
+            app.UseStatusCodePagesWithReExecute("/Error/PageNotFound");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

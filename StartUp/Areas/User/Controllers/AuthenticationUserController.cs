@@ -65,7 +65,7 @@ namespace StartUp.Areas.User.Controllers
 				return View();
 			}
 
-			ViewBag.UserName = user!.UserName;
+			ViewBag.Id = user!.Id;
 			_toasty.AddInfoToastMessage(NotificationMessagesIdentity.UserEdit(user.UserName!),
 				new ToastrOptions { Title = NotificationMessagesIdentity.SucceededTitle });
 			return RedirectToAction("Index", "Dashboard", new { Area = "User" });
