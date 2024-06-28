@@ -106,8 +106,14 @@ namespace StartUp.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult LogIn()
+		public IActionResult LogIn(string? errorMessage)
 		{
+			if (errorMessage != null)
+			{
+				ViewBag.Result = "Failed";
+				ModelState.AddModelErrorList(new List<string> { errorMessage });
+				return View();
+			}
 			return View();
 		}
 

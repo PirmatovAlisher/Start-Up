@@ -15,7 +15,6 @@
     <Folder Include="Exceptions\Identity\" />
     <Folder Include="Filter\Identity\" />
     <Folder Include="Helpers\WebApplication\" />
-    <Folder Include="MiddleWares\Identity\" />
     <Folder Include="MiddleWares\WebApplication\" />
   </ItemGroup>
 

@@ -1,6 +1,7 @@
 using NToastNotify;
 using RepositoryLayer.Extensions;
 using ServiceLayer.Extensions;
+using ServiceLayer.MiddleWares.Identity;
 
 namespace StartUp
 {
@@ -38,7 +39,9 @@ namespace StartUp
             app.UseAuthentication();
             app.UseAuthorization();
 
-# pragma warning disable ASP0014
+            app.UseMiddleware<SecurityStampCheck>();
+
+            # pragma warning disable ASP0014
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
