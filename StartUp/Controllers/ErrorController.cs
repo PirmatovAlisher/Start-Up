@@ -9,6 +9,13 @@ namespace StartUp.Controllers
 {
 	public class ErrorController : Controller
 	{
+		private readonly ILogger<ErrorController> _logger;
+
+		public ErrorController(ILogger<ErrorController> logger)
+		{
+			_logger = logger;
+		}
+
 		public IActionResult GeneralExceptions()
 		{
 			var exceptions = HttpContext.Features.Get<IExceptionHandlerFeature>()!.Error;
@@ -26,6 +33,7 @@ namespace StartUp.Controllers
 				return View(new ErrorVM("You have too delete all relevant data before move on.", 401));
 			}
 
+			_logger.LogError("The error message from system : " + exceptions.Message);
 			return View(new ErrorVM("Server error, please contact with server", 500)); ;
 		}
 
