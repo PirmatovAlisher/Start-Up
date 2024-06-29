@@ -84,5 +84,15 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
 				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 		}
+
+		//UI Service Methods
+		public async Task<List<HomePageVMForUI>> GetAllListForUI()
+		{
+			var uiList = await _repository.GetAllEntityList().ToListAsync();
+
+			var homePageListVMForUI = _mapper.Map<List<HomePageVMForUI>>(uiList);
+
+			return homePageListVMForUI;
+		}
 	}
 }
