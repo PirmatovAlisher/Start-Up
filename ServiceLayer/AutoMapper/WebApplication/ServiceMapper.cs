@@ -14,6 +14,7 @@ namespace ServiceLayer.AutoMapper.WebApplication
     {
         public ServiceMapper()
         {
+            CreateMap<Service, ServiceListForUI>().ReverseMap();
             CreateMap<Service, ServiceAddVM>().ReverseMap();
             CreateMap<Service, ServiceUpdateVM>().ReverseMap();
             CreateMap<Service, ServiceListVM>().ReverseMap();
