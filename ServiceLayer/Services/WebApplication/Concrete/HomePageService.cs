@@ -86,7 +86,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 		}
 
 		//UI Service Methods
-		public async Task<List<HomePageVMForUI>> GetAllListForUI()
+		public async Task<List<HomePageVMForUI>> GetAllListForUIAsync()
 		{
 			var uiList = await _repository.GetAllEntityList().ToListAsync();
 

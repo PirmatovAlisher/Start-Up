@@ -13,6 +13,7 @@ namespace ServiceLayer.AutoMapper.WebApplication
     {
         public AboutMapper()
         {
+            CreateMap<About, AboutListForIU>().ReverseMap();
             CreateMap<About, AboutListVM>().ReverseMap();
             CreateMap<About, AboutAddVM>().ReverseMap();
             CreateMap<About, AboutUpdateVM>().ReverseMap();

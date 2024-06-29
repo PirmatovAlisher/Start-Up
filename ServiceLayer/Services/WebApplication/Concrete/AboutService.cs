@@ -125,5 +125,15 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 
 		}
+
+		//UI Side Methods
+		public async Task<List<AboutListForIU>> GetAllListForUIAsync()
+		{
+			var aboutList = await _repository.GetAllEntityList().Include(x => x.SocialMedia).ToListAsync();
+
+			var aboutListForUI = _mapper.Map<List<AboutListForIU>>(aboutList);
+
+			return aboutListForUI;
+		}
 	}
 }
