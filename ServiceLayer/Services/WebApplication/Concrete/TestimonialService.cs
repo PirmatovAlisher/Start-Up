@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using CoreLayer.Enumerators;
 using EntityLayer.WebApplication.Entities;
+using EntityLayer.WebApplication.ViewModels.ServiceVM;
 using EntityLayer.WebApplication.ViewModels.TestimonialVM;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
@@ -121,6 +122,16 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			}
 			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
 				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
+		}
+
+		// Methods for UI
+		public async Task<List<TestimonialListForUI>> GetAllListForUIAsync()
+		{
+			var uiList = await _repository.GetAllEntityList().ToListAsync();
+
+			var testimonialListVMForUI = _mapper.Map<List<TestimonialListForUI>>(uiList);
+
+			return testimonialListVMForUI;
 		}
 	}
 }
