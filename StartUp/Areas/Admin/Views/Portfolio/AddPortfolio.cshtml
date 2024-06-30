@@ -25,7 +25,6 @@
 		<!-- Floating Labels Form -->
 		<form asp-area="Admin" asp-controller="Portfolio" asp-action="AddPortfolio" method="post" class="row g-3" enctype="multipart/form-data">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			@* <input type="hidden" asp-for="CategoryId" value="1" /> *@
 			<div class="col-md-12">
 				<div class="form-floating">
 					<input asp-for="Title" type="text" class="form-control" placeholder="Title here">
@@ -35,16 +34,9 @@
 			</div>
 			<div class="col-md-12">
 				<div class="form-floating">
-					<input asp-for="FileName" type="text" class="form-control" placeholder="File Name here">
-					<label asp-for="FileName">File Name</label>
-					<span asp-validation-for="FileName" class="text-danger"></span>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="form-floating">
-					<input asp-for="FileType" type="text" class="form-control" placeholder="File Type here">
-					<label asp-for="FileType">File Type</label>
-					<span asp-validation-for="FileType" class="text-danger"></span>
+					<select asp-for="CategoryId" asp-items="@(new SelectList(Model.CategoryList,"Id","Name"))" class="form-control" placeholder="Category Name"></select>
+					<span asp-validation-for="CategoryId" class="text-danger"></span>
+					<label asp-for="CategoryId">Category</label>
 				</div>
 			</div>
 

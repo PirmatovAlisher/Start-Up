@@ -11,11 +11,11 @@ namespace EntityLayer.WebApplication.ViewModels.PortfolioVM
     public class PortfolioAddVM
     {
 
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; } = null!;
 
-        public string FileName { get; set; } = string.Empty;
+		public string FileName { get; set; } = null!;
 
-        public string FileType { get; set; } = string.Empty;
+		public string FileType { get; set; } = null!;
 
 
 
@@ -26,5 +26,7 @@ namespace EntityLayer.WebApplication.ViewModels.PortfolioVM
 		public int CategoryId { get; set; }
 
         public CategoryAddVM Category { get; set; } = null!;
-    }
+
+		public IList<CategoryListVM> CategoryList { get; set; } = null!;
+	}
 }

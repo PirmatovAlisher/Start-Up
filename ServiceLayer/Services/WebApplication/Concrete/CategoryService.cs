@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using EntityLayer.WebApplication.Entities;
 using EntityLayer.WebApplication.ViewModels.AboutVM;
 using EntityLayer.WebApplication.ViewModels.CategortVM;
+using EntityLayer.WebApplication.ViewModels.PortfolioVM;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using RepositoryLayer.Repositories.Abstract;
@@ -86,6 +87,16 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 			_toasty.AddInfoToastMessage(NotificationMessagesWebApplication.UpdateMessage(Section),
 				new ToastrOptions { Title = NotificationMessagesWebApplication.SucceededTitle });
 
+		}
+
+		//UI Side Methods
+		public async Task<List<CategoryListForUI>> GetAllListForUIAsync()
+		{
+			var uiList = await _repository.GetAllEntityList().ToListAsync();
+
+			var categoryListVMForUI = _mapper.Map<List<CategoryListForUI>>(uiList);
+
+			return categoryListVMForUI;
 		}
 	}
 }

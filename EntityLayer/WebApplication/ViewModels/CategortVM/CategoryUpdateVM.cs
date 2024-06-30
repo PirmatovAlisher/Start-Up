@@ -15,8 +15,8 @@ namespace EntityLayer.WebApplication.ViewModels.CategortVM
 
         public byte[] RowVersion { get; set; } = null!;
 
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = null!;
 
-        public List<PortfolioUpdateVM> Portfolios { get; set; } = null!;
+        //public List<PortfolioUpdateVM> Portfolios { get; set; } = null!;
     }
 }

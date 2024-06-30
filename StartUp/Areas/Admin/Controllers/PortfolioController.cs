@@ -14,16 +14,19 @@ namespace StartUp.Areas.Admin.Controllers
 	public class PortfolioController : Controller
 	{
 		private readonly IPortfolioService _portfolioService;
+		private readonly ICategoryService _categoryService;
 		private readonly IValidator<PortfolioAddVM> _addValidator;
 		private readonly IValidator<PortfolioUpdateVM> _updateValidator;
 
 		public PortfolioController(IPortfolioService portfolioService,
 			IValidator<PortfolioAddVM> addValidator,
-			IValidator<PortfolioUpdateVM> updateValidator)
+			IValidator<PortfolioUpdateVM> updateValidator,
+			ICategoryService categoryService)
 		{
 			_portfolioService = portfolioService;
 			_addValidator = addValidator;
 			_updateValidator = updateValidator;
+			_categoryService = categoryService;
 		}
 
 		public async Task<IActionResult> GetPortfolioList()
@@ -35,9 +38,10 @@ namespace StartUp.Areas.Admin.Controllers
 
 
 		[HttpGet]
-		public IActionResult AddPortfolio()
+		public async Task<IActionResult> AddPortfolio()
 		{
-			return View();
+			var categories = await _categoryService.GetAllListAsync();
+			return View(new PortfolioAddVM { CategoryList = categories });
 		}
 
 
@@ -64,6 +68,8 @@ namespace StartUp.Areas.Admin.Controllers
 		public async Task<IActionResult> UpdatePortfolio(int id)
 		{
 			var portfolio = await _portfolioService.GetPortfolioById(id);
+			var categories = await _categoryService.GetAllListAsync();
+			portfolio.CategoryList = categories;
 
 			return View(portfolio);
 		}

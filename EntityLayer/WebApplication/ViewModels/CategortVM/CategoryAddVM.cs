@@ -12,6 +12,6 @@ namespace EntityLayer.WebApplication.ViewModels.CategortVM
     {
         public string Name { get; set; } = string.Empty;
 
-        public List<PortfolioListVM> Portfolios { get; set; } = null!;
+        //public List<PortfolioListVM> Portfolios { get; set; } = null!;
     }
 }

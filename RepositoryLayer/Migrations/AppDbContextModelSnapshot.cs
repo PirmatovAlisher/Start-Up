@@ -52,14 +52,14 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = "de820986-a707-4cc5-8306-776812617837",
-                            ConcurrencyStamp = "99738a46-0d19-495d-9835-fae32dddf681",
+                            ConcurrencyStamp = "f5f4018b-0e50-4089-9371-32570febb816",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = "d140eb54-ed6e-4ff2-9199-71fcbe722ef7",
-                            ConcurrencyStamp = "5eef3fea-3879-4235-bfd5-4f3d334e3512",
+                            ConcurrencyStamp = "72422fd4-4ba6-44ee-ab86-c410c64e978a",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
@@ -140,15 +140,15 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = "256ac0cc-c4b0-458d-957d-24cbfd49225b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ddde2763-fe4f-4211-b2ef-00e592c246a2",
+                            ConcurrencyStamp = "ac1fbae8-8f93-4550-bf88-fd0bec603afb",
                             Email = "pirmatovalisher000@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "PIRMATOVALISHER000@GMAIL.COM",
                             NormalizedUserName = "TESTADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBVVH7XzRNZ9c6tWeHhEzzqHoR8W6jYO2HuL21UYR3DnFDzzZX8ZnEDUNB9VtZ2x4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPKFdBl5csKp/J56HzfheBNZho26FvqhjyHoQFGEQjYiu3o5lq860jJa3OtnshUVVw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2cb40710-4aaa-49bf-a383-68aa8c447880",
+                            SecurityStamp = "8d1da12c-c977-42db-b7a7-2713aa528b76",
                             TwoFactorEnabled = false,
                             UserName = "TestAdmin"
                         },
@@ -156,15 +156,15 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = "dce8cfd5-d290-4353-b50d-58707ed8da4d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "688f298a-a239-4b90-aa01-2ddc6a9ff028",
+                            ConcurrencyStamp = "89aa8981-ab26-455b-8a4d-3ad93396e198",
                             Email = "pirmatovalisher0000@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "PIRMATOVALISHER0000@GMAIL.COM",
                             NormalizedUserName = "TESTMEMBER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH2wdrTFvKxSGIpHckjO/ZFByqKEiTNtrU3uSVWRUwiW13ryaM+1CJTlSyPAlFklcA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMSkqdqQiK3Vctb69hgnLBxAs88KpbZkK34HEsHAS5cA6ZyHBTqhxkF81itxssMFUA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e160151b-8a92-4807-8c6d-9ea00e3af0a3",
+                            SecurityStamp = "24adf50d-2794-4cc6-b170-bc588004d168",
                             TwoFactorEnabled = false,
                             UserName = "TestMember"
                         });
@@ -241,7 +241,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Clients = 5,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 692, DateTimeKind.Local).AddTicks(8690),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 802, DateTimeKind.Local).AddTicks(2379),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In ante metus dictum at tempor commodo ullamcorper a lacus. Suspendisse in est ante in nibh mauris. Lorem ipsum dolor sit amet consectetur adipiscing elit. Erat imperdiet sed euismod nisi. Sed blandit libero volutpat sed cras ornare arcu dui vivamus. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa.",
                             FileName = "Test",
                             FileType = "Test",
@@ -288,13 +288,13 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 695, DateTimeKind.Local).AddTicks(6774),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 802, DateTimeKind.Local).AddTicks(5699),
                             Name = "Projects"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 695, DateTimeKind.Local).AddTicks(6781),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 802, DateTimeKind.Local).AddTicks(5703),
                             Name = "SiteWorks"
                         });
                 });
@@ -349,7 +349,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Call = "+998-94-361-99-25",
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 695, DateTimeKind.Local).AddTicks(8736),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(721),
                             Email = "pirmatovalisher000@gmail.com",
                             Location = "Tarraqiyot 35, 37-Xamza MFY, Chirchiq shaxri, Toshkent v., Uzb",
                             Map = "Location Link here"
@@ -400,7 +400,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 696, DateTimeKind.Local).AddTicks(5956),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(2487),
                             Description = "Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis. Nec nam aliquam sem et tortor. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Diam in arcu cursus euismod quis viverra nibh cras. Velit sed ullamcorper morbi tincidunt ornare. ",
                             Header = "Rutrum tellus pellentesque eu tincidunt.",
                             VideoLink = "Video Link here"
@@ -456,7 +456,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 696, DateTimeKind.Local).AddTicks(8381),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(4523),
                             FileName = "Fames ac turpis",
                             FileType = ".blend",
                             Title = "Sed velit dignissim sodales ut eu sem integer vitae justo."
@@ -465,7 +465,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 696, DateTimeKind.Local).AddTicks(8387),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(4529),
                             FileName = " Sed id interdum",
                             FileType = ".DXF",
                             Title = "Arcu bibendum at varius vel."
@@ -474,7 +474,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 696, DateTimeKind.Local).AddTicks(8388),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(4530),
                             FileName = "Mattis ac turpis",
                             FileType = ".blend",
                             Title = "Mattis pellentesque id nibh"
@@ -483,7 +483,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 696, DateTimeKind.Local).AddTicks(8389),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(4531),
                             FileName = " Tellus id interdum",
                             FileType = ".DXF",
                             Title = "Nec ullamcorper sit amet risus nullam eget felis eget."
@@ -535,7 +535,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(1203),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(6215),
                             Description = "Augue interdum velit euismod in. Egestas dui id ornare arcu. Duis at tellus at urna condimentum mattis pellentesque id nibh. ",
                             Icon = "bi bi-service1",
                             Name = "Tristique"
@@ -543,7 +543,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(1212),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(6220),
                             Description = "Donec adipiscing tristique risus nec feugiat in fermentum posuere.",
                             Icon = "bi bi-service2",
                             Name = "Faucibus"
@@ -551,7 +551,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(1213),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(6221),
                             Description = "Neque egestas congue quisque egestas diam in.",
                             Icon = "bi bi-service3",
                             Name = "Porttitor"
@@ -600,7 +600,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(2830),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 803, DateTimeKind.Local).AddTicks(8933),
                             Facebook = "Facebook",
                             Instagram = "Instagram",
                             Twitter = "Twitter"
@@ -667,7 +667,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(4444),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 804, DateTimeKind.Local).AddTicks(676),
                             Facebook = "Test",
                             FileName = "Lectus quam",
                             FileType = ".sat",
@@ -732,7 +732,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             Comment = "Vitae suscipit tellus mauris a diam maecenas sed.",
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(6060),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 804, DateTimeKind.Local).AddTicks(2395),
                             FileName = "Hendrerit gravida",
                             FileType = ".jpeg",
                             FullName = "Massa Lobortis",
@@ -742,7 +742,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 2,
                             Comment = "Nulla posuere sollicitudin",
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(6065),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 804, DateTimeKind.Local).AddTicks(2401),
                             FileName = "Proin sed libero enim",
                             FileType = ".cs",
                             FullName = "Vitae Eget",
@@ -752,7 +752,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 3,
                             Comment = "Rutrum tellus pellentesque eu tincidunt.",
-                            CreatedDate = new DateTime(2024, 6, 27, 12, 57, 58, 697, DateTimeKind.Local).AddTicks(6066),
+                            CreatedDate = new DateTime(2024, 6, 30, 11, 35, 58, 804, DateTimeKind.Local).AddTicks(2402),
                             FileName = "Donec adipiscing",
                             FileType = ".cshtml",
                             FullName = "Rutrum Cursus",
@@ -895,7 +895,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             ClaimType = "AdminObserverExpireDate",
-                            ClaimValue = "21-Jun-24 12:57:58 PM",
+                            ClaimValue = "06-Jul-24 11:35:58 AM",
                             UserId = "dce8cfd5-d290-4353-b50d-58707ed8da4d"
                         });
                 });
