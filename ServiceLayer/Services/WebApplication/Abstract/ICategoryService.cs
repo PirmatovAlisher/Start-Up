@@ -16,5 +16,7 @@ namespace ServiceLayer.Services.WebApplication.Abstract
         Task DeleteCategoryAsync(int id);
         Task<CategoryUpdateVM> GetCategoryById(int id);
         Task UpdateCategoryAsync(CategoryUpdateVM request);
-    }
+        Task<List<CategoryListForUI>> GetAllListForUIAsync();
+
+	}
 }
