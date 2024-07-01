@@ -15,5 +15,7 @@ namespace ServiceLayer.Services.WebApplication.Abstract
         Task DeleteContactAsync(int id);
         Task<ContactUpdateVM> GetContactById(int id);
         Task UpdateContactAsync(ContactUpdateVM request);
-    }
+        Task<List<ContactListForUI>> GetAllListForUIAsync();
+
+	}
 }

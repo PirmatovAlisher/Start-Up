@@ -1,0 +1,45 @@
+﻿@model List<ContactListForUI>
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+	<div class="container">
+
+		<div class="section-title">
+			<span>Contact</span>
+			<h2>Contact</h2>
+		</div>
+
+		<div class="row ">
+			@foreach (var item in Model)
+			{
+				<div class="col-lg-5 d-flex align-items-stretch">
+					<div class="info">
+						<div class="address">
+							<i class="bi bi-geo-alt"></i>
+							<h4>Location:</h4>
+							<p>@item.Location</p>
+						</div>
+
+						<div class="email">
+							<i class="bi bi-envelope"></i>
+							<h4>Email:</h4>
+							<p>@item.Email</p>
+						</div>
+
+						<div class="phone">
+							<i class="bi bi-phone"></i>
+							<h4>Call:</h4>
+							<p>@item.Call</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+					<iframe src="@item.Map" width="750" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+				</div>
+			}
+		</div>
+
+	</div>
+</section><!-- End Contact Section -->
