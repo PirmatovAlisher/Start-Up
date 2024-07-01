@@ -1,8 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
 @await Component.InvokeAsync("About")
 @await Component.InvokeAsync("Service")
 @await Component.InvokeAsync("Portfolio")
 @await Component.InvokeAsync("Testimonials")
+
+<!-- ======= Cta Section ======= -->
+<section id="cta" class="cta">
+	<div class="container">
+
+		<div class="text-center">
+			<h3>Call To Action</h3>
+			<p> Welcome to our StartUp company, contact with us to get more information.</p>
+			<a class="cta-btn" href="#">Contact Us</a>
+		</div>
+
+	</div>
+</section><!-- End Cta Section -->
+
+
+@await Component.InvokeAsync("Team")
