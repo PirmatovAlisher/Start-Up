@@ -820,19 +820,19 @@ h6 {
   flex-grow: 0;
 }
 
-.dashboard .sales-card .card-icon {
-  color: #4154f1;
-  background: #f6f6fe;
+.dashboard .services-card .card-icon {
+ color: #4154f1;
+ background: #f6f6fe;
 }
 
-.dashboard .revenue-card .card-icon {
-  color: #2eca6a;
-  background: #e0f8e9;
+.dashboard .teams-card .card-icon {
+ color: #2eca6a;
+ background: #e0f8e9;
 }
 
-.dashboard .customers-card .card-icon {
-  color: #ff771d;
-  background: #ffecdf;
+.dashboard .testimonials-card .card-icon {
+ color: #ff771d;
+ background: #ffecdf;
 }
 
 /* Activity */

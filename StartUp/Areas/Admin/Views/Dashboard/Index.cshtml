@@ -1,8 +1,143 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Dashboard</h1>
+<section class="section dashboard">
+	<!-- Left side columns -->
+	<div class="row">
+
+		<!-- Sales Card -->
+		<div class="col-xxl-3 col-xl-4 col-md-4 col-sm-6">
+			<div class="card info-card sales-card">
+
+				<div class="card-body">
+					<h5 class="card-title">Services <span>| All the time</span></h5>
+
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							<i class="bi bi-ui-checks"></i>
+						</div>
+						<div class="ps-3">
+							<h6>@ViewBag.Services</h6>
+							<span class="text-muted small pt-2 ps-1">Available services</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div><!-- End Sales Card -->
+		<!-- Revenue Card -->
+		<div class="col-xxl-3 col-xl-4 col-md-4 col-sm-6">
+			<div class="card info-card revenue-card">
+
+				<div class="card-body">
+					<h5 class="card-title">Teams <span>| All the time</span></h5>
+
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							<i class="bi bi-people-fill"></i>
+						</div>
+						<div class="ps-3">
+							<h6>@ViewBag.Teams</h6>
+							<span class="text-muted small pt-2 ps-1">Available team members</span>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div><!-- End Revenue Card -->
+		<!-- Customers Card -->
+		<div class="col-xxl-3 col-xl-4 col-md-4 col-sm-6">
+
+			<div class="card info-card customers-card">
+				<div class="card-body">
+					<h5 class="card-title">Testimonials <span>| All the time</span></h5>
+
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							<i class="bi bi-search"></i>
+						</div>
+						<div class="ps-3">
+							<h6>@ViewBag.Testimonials</h6>
+							<span class="text-muted small pt-2 ps-1">Testimonials we have</span>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div><!-- End Customers Card -->
+		<!-- Customers Card -->
+		<div class="col-xxl-3 col-xl-4 col-md-4 col-sm-6">
+
+			<div class="card info-card customers-card">
+				<div class="card-body">
+					<h5 class="card-title">Categories <span>| All the time</span></h5>
+
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							<i class="bi bi-list-ul"></i>
+						</div>
+						<div class="ps-3">
+							<h6>@ViewBag.Categories</h6>
+							<span class="text-muted small pt-2 ps-1">Different categories we have</span>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div><!-- End Customers Card -->
+		<!-- Customers Card -->
+		<div class="col-xxl-3 col-xl-4 col-md-4 col-sm-6">
+
+			<div class="card info-card customers-card">
+				<div class="card-body">
+					<h5 class="card-title">Portfolios <span>| All the time</span></h5>
+
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							<i class="bi bi-person-vcard-fill"></i>
+						</div>
+						<div class="ps-3">
+							<h6>@ViewBag.Portfolios</h6>
+							<span class="text-muted small pt-2 ps-1">Portfolios we have</span>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div><!-- End Customers Card -->
+		<!-- Customers Card -->
+		<div class="col-xxl-3 col-xl-4 col-md-4 col-sm-6">
+
+			<div class="card info-card customers-card">
+				<div class="card-body">
+					<h5 class="card-title">Users <span>| All the time</span></h5>
+
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							<i class="bi bi-person-fill"></i>
+						</div>
+						<div class="ps-3">
+							<h6>@ViewBag.Users</h6>
+							<span class="text-muted small pt-2 ps-1">Customer worked with us</span>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div><!-- End Customers Card -->
+
+	</div><!-- End Left side columns -->
+</section>
+
 

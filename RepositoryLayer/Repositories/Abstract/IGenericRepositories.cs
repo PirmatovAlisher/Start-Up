@@ -16,6 +16,8 @@ namespace RepositoryLayer.Repositories.Abstract
         IQueryable<T> GetAllEntityList();
         IQueryable<T> Where(Expression<Func<T, bool>> predicate);
         Task<T> GetEntityByIdAsync(int id);
+        Task<int> GetAllCount();
 
-    }
+
+	}
 }
