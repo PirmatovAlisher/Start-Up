@@ -1,8 +1,21 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+@if (User.IsInRole("SuperAdmin"))
+{
+	<div class="alert alert-info fade show fw-bolder" role="alert">
+		Welcome to our company Admin Dashboard!
+	</div>
+}
+else
+{
+	<div class="alert alert-info fade show fw-bolder" role="alert">
+		Welcome to our company Dashboard!
+	</div>
+
+}
+
+
 

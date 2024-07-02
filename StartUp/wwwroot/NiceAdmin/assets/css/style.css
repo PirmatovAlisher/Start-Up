@@ -820,19 +820,34 @@ h6 {
   flex-grow: 0;
 }
 
-.dashboard .services-card .card-icon {
- color: #4154f1;
- background: #f6f6fe;
+.dashboard .sales-card .card-icon {
+    color: #4154f1;
+    background: #f6f6fe;
 }
 
-.dashboard .teams-card .card-icon {
- color: #2eca6a;
- background: #e0f8e9;
+.dashboard .revenue-card .card-icon {
+    color: #2eca6a;
+    background: #e0f8e9;
 }
 
-.dashboard .testimonials-card .card-icon {
- color: #ff771d;
- background: #ffecdf;
+.dashboard .customers-card .card-icon {
+    color: #ff771d;
+    background: #ffecdf;
+}
+
+.dashboard .categories-card .card-icon {
+    color: #8d04cc;
+    background: #e9dcf7;
+}
+
+.dashboard .portfolios-card .card-icon {
+    color: #a0d716;
+    background: #eef3d1;
+}
+
+.dashboard .users-card .card-icon {
+    color: #16acd5;
+    background: #d1f4f6;
 }
 
 /* Activity */
