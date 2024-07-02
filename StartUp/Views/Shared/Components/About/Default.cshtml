@@ -7,10 +7,34 @@
 	<!-- ======= About Section ======= -->
 	<section id="about" class="about">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-lg-6">
-					<img src="~/images/@item.FileName" class="img-fluid" alt="StartUp">
+					<div class="row d-flex">
+						<img src="~/images/@item.FileName" class="img-fluid" alt="StartUp">
+					</div>
+					<div class="row mt-2 fs-3 ">
+						<div class="col-md d-flex justify-content-center">
+							<div class="social">
+								@if (!string.IsNullOrWhiteSpace(item.SocialMedia.Twitter))
+								{
+									<a href="@item.SocialMedia.Twitter"><i class="bi bi-twitter"></i></a>
+								}
+								@if (!string.IsNullOrWhiteSpace(item.SocialMedia.Facebook))
+								{
+									<a href="@item.SocialMedia.Facebook"><i class="bi bi-facebook"></i></a>
+								}
+								@if (!string.IsNullOrWhiteSpace(item.SocialMedia.Instagram))
+								{
+									<a href="@item.SocialMedia.Instagram"><i class="bi bi-instagram"></i></a>
+								}
+								@if (!string.IsNullOrWhiteSpace(item.SocialMedia.LinkedId))
+								{
+									<a href="@item.SocialMedia.LinkedId"><i class="bi bi-linkedin"></i></a>
+								}
+							</div>
+						</div>
+
+					</div>
 				</div>
 				<div class="col-lg-6 pt-4 pt-lg-0 content">
 					<h3>@item.Header</h3>
