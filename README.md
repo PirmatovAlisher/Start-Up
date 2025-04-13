@@ -7,15 +7,15 @@ https://github.com/user-attachments/assets/1b7ee889-f847-4637-b642-efec8ea3a9bc
 
 ## 📑 Table of Contents
 
-- [Overview](#overview-)
-- [Features](#features-)
-  - [User Features](#user-features-)
-  - [Admin Features](#admin-features-)
-- [Tech Stack](#tech-stack-)
-- [Project Structure](#project-structure-)
-- [Video Demonstrations](#video-demonstrations-)
-- [Learnings](#learnings-)
-- [Contact](#contact-)
+- [Overview](#-overview)
+- [Features](#-features)
+  - [User Features](#-user-features)
+  - [Admin Features](#-admin-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Video Demonstrations](#-video-demonstrations)
+- [Learnings](#-learnings)
+- [Contact](#-contact)
 
 ## 🎯 Overview 
 
